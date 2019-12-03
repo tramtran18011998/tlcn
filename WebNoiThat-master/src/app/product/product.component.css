@@ -1,0 +1,82 @@
+.breadcrumb {
+    margin-top: 10px;
+}
+
+
+/* danh mục*/
+
+.list-group {
+    margin-bottom: 10px;
+}
+
+.line {
+    border-bottom: solid 1px #DDDDDD;
+}
+
+.note-price {
+    color: gray;
+    font-size: 12px;
+}
+
+.price-value {
+    display: inline;
+}
+
+.price-value input {
+    max-width: 120px;
+}
+
+button.btn.btn-outline-primary {
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.alert.alert-secondary {
+    display: block;
+}
+
+select.form-control {
+    max-width: 250px;
+    float: right;
+}
+
+.col-4 input.form-control {
+    max-width: 250px;
+}
+
+.col-4 input.form-control {
+    float: right;
+}
+
+.col-2 {
+    padding: 0;
+}
+
+.product-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-img img {
+    width: 100%;
+    margin-bottom: 8px;
+    vertical-align: middle;
+    max-height: 200px;
+    min-height: 200px;
+}
+
+.product-info p {
+    color: black;
+}
+
+.product-info strong {
+    color: black;
+    float: right;
+}
+
+.col-md-4.col-sm-6.col-12 a {
+    text-decoration: none;
+}

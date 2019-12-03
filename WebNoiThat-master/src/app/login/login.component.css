@@ -1,0 +1,38 @@
+/* dangnhap*/
+
+.content-wrapper {
+    padding-top: 50px;
+}
+
+.col-lg-6.login-form {
+    padding: 30px;
+    background: whitesmoke;
+}
+
+.col-lg-6.login-form h2 {
+    margin-bottom: 30px;
+}
+
+.col-lg-6 {
+    padding: 0;
+}
+
+button.btn.btn-primary {
+    width: 100%;
+    border-radius: 25px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+input#exampleInputEmail1 {
+    border-radius: 25px;
+}
+
+input#exampleInputPassword1 {
+    border-radius: 25px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}

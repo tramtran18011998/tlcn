@@ -1,0 +1,110 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 18%;
+    background-color: #3A4A51;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+.sidebar a {
+    color: #AAB1B4;
+    text-decoration: none;
+    padding: 20px;
+}
+
+li {
+    padding: 20px 0px;
+}
+
+#title {
+    font-size: 35px;
+    margin-left: 20px;
+}
+
+.title {
+    border-bottom: solid 1px #566369;
+    margin: 2px 20px 2px 10px;
+    font-size: 18px;
+}
+
+.title a {
+    padding-left: 0;
+}
+
+.sidebar span {
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+i.fab.fa-angular {
+    font-size: 35px;
+}
+
+i.fas.fa-chair {
+    margin-right: 7.5px;
+}
+
+i.fas.fa-user-tie {
+    margin-right: 7.5px;
+}
+
+.navbar.top-nav {
+    background-color: #3A4A51;
+}
+
+a.navbar-brand {
+    color: #AAB1B4;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+a#navbarDropdown {
+    color: #AAB1B4;
+}
+
+.container-fluid {
+    padding-left: 0;
+}
+
+.main-content {
+    margin-top: 50px;
+    margin-right: 50px;
+}
+
+.col-md-9.col-sm-9.col-9 {
+    padding-left: 0;
+}
+
+button.btn.btn-success {
+    font-size: 10px;
+    margin-right: 10px;
+}
+
+button.btn.btn-danger {
+    font-size: 10px;
+}
+
+.table td {
+    padding: 5px;
+    vertical-align: middle;
+}
+
+.table {
+    margin-top: 10px;
+    float: right;
+}
+
+
+/* .line {
+    border-bottom: solid 1px white;
+    margin-left: 10px;
+    margin-right: 10px;
+} */

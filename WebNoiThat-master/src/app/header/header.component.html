@@ -1,0 +1,32 @@
+<!--Header-->
+<div class="container-fluid">
+    <div class="row header-content">
+        <div class="header-logo col-sm-5 col-md-9">
+            <a routerLink="/"><img src="assets/image/logo.png">Webnoithat</a>
+            <div>
+                    <span id="spanName">{{currentName}}</span>
+                </div>
+        </div>
+        
+        <div class="form-inline col-sm-7 col-md-3">
+            <input class="form-control search-header" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-dark my-2 my-sm-0 btn-search-header" type="submit">Search</button>
+        </div>
+    </div>
+</div>
+<!--Thanh Navbar-->
+<div class="navbar">
+    <ul>
+        <li><a routerLink="/">Trang chủ</a></li>
+        <li><a routerLink="/product">Sản phẩm</a></li>
+        <li><a routerLink="/accessory">Phụ kiện</a></li>
+        <li><a routerLink="/about">Giới thiệu</a></li>
+        <li><a routerLink="/contact">Liên hệ</a></li>
+        <li class="nav-right">
+            <a routerLink="/login"><img src="assets/image/login.png">Đăng nhập</a>
+        </li>
+        <li class="nav-right">
+            <a routerLink="/cart"><img src="assets/image/shopping-cart.png"> Giỏ hàng</a>
+        </li>
+    </ul>
+</div>

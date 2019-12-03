@@ -1,0 +1,36 @@
+/*footer*/
+
+.footer-content {
+    margin-top: 30px;
+    display: block;
+    position: relative;
+}
+
+.footer-content .container-fluid {
+    position: absolute;
+    /* left: 5px; */
+    top: 70px;
+    color: white;
+}
+
+.footer-title {
+    text-align: center;
+}
+
+.form-row {
+    margin-bottom: 5px;
+}
+
+textarea.form-control {
+    margin-bottom: 5px;
+}
+
+.send-contact form input {
+    background-color: rgba(255, 255, 255, 0.6);
+    transition: all 0.5s;
+}
+
+.send-contact form textarea {
+    background-color: rgba(255, 255, 255, 0.6);
+    transition: all 0.5s;
+}
