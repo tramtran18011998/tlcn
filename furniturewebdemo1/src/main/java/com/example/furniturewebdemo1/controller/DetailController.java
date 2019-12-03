@@ -46,7 +46,7 @@ public class DetailController {
         currentDetail.setDiscountPrice(detail.getDiscountPrice());
         currentDetail.setSize(detail.getSize());
         currentDetail.setMaterial(detail.getMaterial());
-        currentDetail.setImage(detail.getImage());
+        //currentDetail.setImage(detail.getImage());
         currentDetail.setDetailType(detail.getDetailType());
         currentDetail.setSupplier(detail.getSupplier());
 

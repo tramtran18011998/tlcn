@@ -26,18 +26,20 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/user/me")
-    @PreAuthorize("hasRole('USER')")
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) throws ResourceNotFoundException {
         return userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
+
+    //update customer information
     @PostMapping("api/user/{id}")
     public ResponseEntity<User> upload(@RequestParam("file") MultipartFile file, @PathVariable(value = "id") long id) throws IOException, ResourceNotFoundException {
-        User user= userService.findByUserId(id).orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
+        User user= userService.findByUserId(id).orElseThrow(()-> new ResourceNotFoundException("User not found"));
         user.setImageUrl(userService.storeAvatar(file,id));
 
         userService.save(user);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
+
 }

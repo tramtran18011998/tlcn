@@ -12,9 +12,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Table(name = "customer", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email")
-})
+@Table(name = "customer")
 @JsonIgnoreProperties({"customer","invoiceDetails","invoiceProducts"})
 public class Customer {
     @Id
@@ -27,7 +25,7 @@ public class Customer {
     private double discount;
 
     @ManyToOne
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "user_id")
     @JsonIgnoreProperties("customers")
     private User user;
 
@@ -42,7 +40,7 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<InvoiceDetail> invoiceDetails;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("customer")
     private Set<Cart> carts;
 }

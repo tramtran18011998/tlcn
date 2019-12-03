@@ -39,5 +39,5 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     @JsonIgnoreProperties("carts")
-    private User user;
+    private Customer customer;
 }

@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "product_image")
-public class ProductImage {
+@Table(name = "detail_image")
+public class DetailImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class ProductImage {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties("productImages")
-    private Product product;
+    @JoinColumn(name = "detail_id")
+    @JsonIgnoreProperties("detailImages")
+    private Detail detail;
 }

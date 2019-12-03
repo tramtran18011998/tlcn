@@ -2,15 +2,13 @@ package com.example.furniturewebdemo1.security.oauth2;
 
 import com.example.furniturewebdemo1.exception.AppException;
 import com.example.furniturewebdemo1.exception.OAuth2AuthenticationProcessingException;
-import com.example.furniturewebdemo1.model.AuthProvider;
-import com.example.furniturewebdemo1.model.Role;
-import com.example.furniturewebdemo1.model.RoleName;
-import com.example.furniturewebdemo1.model.User;
+import com.example.furniturewebdemo1.model.*;
 import com.example.furniturewebdemo1.repository.RoleRepository;
 import com.example.furniturewebdemo1.repository.UserRepository;
 import com.example.furniturewebdemo1.security.UserPrincipal;
 import com.example.furniturewebdemo1.security.oauth2.user.OAuth2UserInfo;
 import com.example.furniturewebdemo1.security.oauth2.user.OAuth2UserInfoFactory;
+import com.example.furniturewebdemo1.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -21,6 +19,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.xml.crypto.Data;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -32,6 +31,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    private CustomerService customerService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -55,6 +57,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
         User user;
+        Customer customer = new Customer();
         if(userOptional.isPresent()) {
             user = userOptional.get();
             if(!user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
@@ -65,6 +68,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             user = updateExistingUser(user, oAuth2UserInfo);
         } else {
             user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
+            customer.setUser(user);
+            customerService.save(customer);
+
         }
 
         return UserPrincipal.create(user, oAuth2User.getAttributes());
@@ -82,6 +88,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .orElseThrow(() -> new AppException("User Role not set."));
 
         user.setRoles(Collections.singleton(userRole));
+        //user.setCreatedDate();
         return userRepository.save(user);
     }
 

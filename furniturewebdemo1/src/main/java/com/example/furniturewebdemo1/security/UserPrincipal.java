@@ -1,6 +1,9 @@
 package com.example.furniturewebdemo1.security;
 
+import com.example.furniturewebdemo1.model.Customer;
 import com.example.furniturewebdemo1.model.User;
+import com.example.furniturewebdemo1.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +22,10 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     private Map<String, Object> attributes;
+
+    @Autowired
+    private static CustomerService customerService;
+
 
     public UserPrincipal(Long id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -45,6 +52,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
     public static UserPrincipal create(User user, Map<String, Object> attributes) {
         UserPrincipal userPrincipal = UserPrincipal.create(user);
+
         userPrincipal.setAttributes(attributes);
         return userPrincipal;
     }

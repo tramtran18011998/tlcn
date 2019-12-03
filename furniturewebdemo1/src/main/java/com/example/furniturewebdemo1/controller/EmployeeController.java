@@ -6,10 +6,12 @@ import com.example.furniturewebdemo1.exception.ResourceNotFoundException;
 import com.example.furniturewebdemo1.model.Employee;
 import com.example.furniturewebdemo1.model.Role;
 import com.example.furniturewebdemo1.model.RoleName;
+import com.example.furniturewebdemo1.model.User;
 import com.example.furniturewebdemo1.payload.LoginE;
 import com.example.furniturewebdemo1.payload.LoginRequest;
 import com.example.furniturewebdemo1.repository.RoleRepository;
 import com.example.furniturewebdemo1.service.EmployeeService;
+import com.example.furniturewebdemo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,35 +33,44 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     RoleRepository roleRepository;
 
     @GetMapping("/employee")
-    public List<Employee> getAllEmployee(){
+    public List<Employee> getAllEmployee() {
         return employeeService.findAllEmployee();
     }
 
     @GetMapping("/employee/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
-        Employee employee=employeeService.findEmployeeId(id).orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
+        Employee employee = employeeService.findEmployeeId(id).orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
         return ResponseEntity.ok().body(employee);
     }
 
-//@PostMapping(value = "/employee", produces = MediaType.IMAGE_PNG_VALUE)
-//public  ResponseEntity<Employee> createEmployee(@Valid @ModelAttribute  Employee employee, @RequestParam("file") MultipartFile file) throws IOException {
-//    employee.setPassword(passwordEncoder.encode(employee.getPassword()));
-//    Role userRole = roleRepository.findByName(RoleName.ROLE_EMPLOYEE)
-//            .orElseThrow(() -> new AppException("User Role not set."));
-//
-//
-//    employee.setRoles(Collections.singleton(userRole));
-//    employee.setAvatar(employeeService.storeAvatar1(file));
-//
-//    employeeService.save(employee);
-//    return new ResponseEntity<>(employee, HttpStatus.CREATED);
-//}
+    @PostMapping(value = "/employee", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<?> createEmployee(@Valid @ModelAttribute Employee employee, @Valid @ModelAttribute User user, @RequestParam("file") MultipartFile file) throws IOException {
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+
+        Role userRole = roleRepository.findByName(RoleName.ROLE_EMPLOYEE)
+                .orElseThrow(() -> new AppException("User Role not set."));
+
+
+        user.setRoles(Collections.singleton(userRole));
+        user.setImageUrl(userService.storeAvatar1(file));
+
+        userService.save(user);
+        employee.setUser(user);
+        employeeService.save(employee);
+
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
 //    @PostMapping(value = "/employee/admin",produces = MediaType.IMAGE_PNG_VALUE)
 //    public  ResponseEntity<Employee> createAdmin(@Valid @ModelAttribute Employee employee,@RequestParam("file") MultipartFile file) throws IOException {
 //        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
@@ -104,7 +115,7 @@ public class EmployeeController {
 
     @DeleteMapping("/employee/{id}")
     public ResponseEntity<Employee> deleteEmployee(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
-        Employee employee=employeeService.findEmployeeId(id).orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
+        Employee employee = employeeService.findEmployeeId(id).orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
         employeeService.delete(employee);
         return ResponseEntity.ok(employee);
     }
