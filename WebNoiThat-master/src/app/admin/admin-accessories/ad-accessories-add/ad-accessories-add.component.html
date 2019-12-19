@@ -1,0 +1,65 @@
+<app-adsidebar></app-adsidebar>
+<app-adnavbar></app-adnavbar>
+<div class="card" style="margin: 16px 0;">
+    <div class="card-body">
+        <h3 class="card-title">Thêm Phụ Kiện</h3>
+        <form class="forms-sample">
+            <div class="form-row">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="ten-phu-kien">Tên Phụ Kiện (bắt buộc)</label>
+                    <input type="text" class="form-control" id="ten-phu-kien" placeholder="Tên phụ kiện">
+                    <small class="text-danger" id="validate-ten-phu-kien"></small>
+
+
+                </div>
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label>Ngày Thêm</label>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type='date' class="form-control" />
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function() {
+                            $('#datetimepicker2').datetimepicker({
+                                locale: 'ru'
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 col-sm-12">
+                    <label for="gia-tien">Giá (bắt buộc)</label>
+                    <input type="number" class="form-control" id="gia-tien" placeholder="150.000">
+                    <small class="text-danger" id="validate-gia-tien"></small>
+                </div>
+                <div class="form-group col-md-6 col-sm-12">
+                    <label for="xac-nhan-mat-khau">Phần Trăm Khuyến Mãi</label>
+                    <input type="number" class="form-control" id="" placeholder="10%">
+
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 col-sm-12">
+                    <label for="exampleFormControlFile1">Ảnh</label>
+                    <div class="input-group input-file" name="Fichier1">
+                        <span class="input-group-btn">
+                    <button class="btn btn-primary btn-choose" type="button">Choose</button>
+                </span>
+                        <input type="text" class="form-control" placeholder='Chọn ảnh' />
+                        <span class="input-group-btn">
+                    <button class="btn btn-warning btn-reset" type="button">Reset</button>
+                </span>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="btn btn-primary btn-rounded" style="color: white;"> Về Trang
+                Quản Lý Phụ Kiện</a>
+            <input type="submit" class="btn btn-primary btn-rounded" style="margin-left: 5px;" id="btn-submit" value="Lưu" />
+        </form>
+    </div>
+</div>

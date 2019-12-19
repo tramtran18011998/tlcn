@@ -41,7 +41,7 @@ public class Employee{
 
 
     @ManyToOne
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "user_id")
     @JsonIgnoreProperties("employees")
     private User user;
 

@@ -47,6 +47,8 @@ public class User extends DateAudit implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "instatus")
+    private Long instatus;
 
     @NotNull
     @Enumerated(EnumType.STRING)

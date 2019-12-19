@@ -21,6 +21,7 @@ import org.springframework.util.StringUtils;
 
 import javax.xml.crypto.Data;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -79,14 +80,18 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
         User user = new User();
 
+        long status=1;
         user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
         user.setProviderId(oAuth2UserInfo.getId());
         user.setName(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
+        user.setInstatus(status);
         Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
+        user.setCreatedDate(new Date());
+        user.setLastModifiedDate(new Date());
         user.setRoles(Collections.singleton(userRole));
         //user.setCreatedDate();
         return userRepository.save(user);
@@ -95,6 +100,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
         existingUser.setName(oAuth2UserInfo.getName());
         existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
+        existingUser.setLastModifiedDate(new Date());
         return userRepository.save(existingUser);
     }
 

@@ -75,4 +75,5 @@ public class Product {
     @JsonIgnoreProperties("categoryTypes")
     private Set<Cart> carts;
 
+
 }

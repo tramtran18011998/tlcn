@@ -10,17 +10,19 @@
         <div class="col-md-3 col-12">
             <h3>Danh mục</h3>
             <div class="list-group" >
-                <div *ngFor="let categoryType of categoryTypes | async" >
+                <div *ngFor="let categoryType of categoryTypes" >
                     <div class="dropdown-container">
-                            <a href="#" class="list-group-item list-group-item-action">{{categoryType.name}}</a>
+                            <a href=""  class="list-group-item list-group-item-action" (click)="getById(categoryType.id)">{{categoryType.name}}
+                                    <!-- <div class="dropdown-menu" *ngFor="let category of categories | async">
+                                                
+                                            <a class="dropdown-item" href="">{{category.name}}</a>
+                                        
+                                    </div>  -->
+                                </a>
                     </div>
                         
                 </div>
                 
-                <!-- <a href="#" class="list-group-item list-group-item-action">Phòng khách</a>
-                <a href="#" class="list-group-item list-group-item-action">Phòng ăn</a>
-                <a href="#" class="list-group-item list-group-item-action">Phòng ngủ</a>
-                <a href="#" class="list-group-item list-group-item-action">Phòng làm việc</a> -->
             </div>
             <h3 class="line">Giá</h3>
             <div class="note-price">

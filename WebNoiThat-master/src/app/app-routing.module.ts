@@ -9,6 +9,26 @@ import { LoginComponent } from './login/login.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductpageComponent } from './productpage/productpage.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminProductComponent } from './admin/admin-product/admin-product.component';
+import { AdProductSeeComponent } from './admin/admin-product/ad-product-see/ad-product-see.component';
+import { AdProductEditComponent } from './admin/admin-product/ad-product-edit/ad-product-edit.component';
+import { AdProductAddComponent } from './admin/admin-product/ad-product-add/ad-product-add.component';
+import { AdminAccessoriesComponent } from './admin/admin-accessories/admin-accessories.component';
+import { AdAccessoriesSeeComponent } from './admin/admin-accessories/ad-accessories-see/ad-accessories-see.component';
+import { AdAccessoriesEditComponent } from './admin/admin-accessories/ad-accessories-edit/ad-accessories-edit.component';
+import { AdAccessoriesAddComponent } from './admin/admin-accessories/ad-accessories-add/ad-accessories-add.component';
+import { AdminCustomerComponent } from './admin/admin-customer/admin-customer.component';
+import { AdCustomerSeeComponent } from './admin/admin-customer/ad-customer-see/ad-customer-see.component';
+import { AdCustomerEditComponent } from './admin/admin-customer/ad-customer-edit/ad-customer-edit.component';
+import { AdCustomerAddComponent } from './admin/admin-customer/ad-customer-add/ad-customer-add.component';
+import { AdminSupplierComponent } from './admin/admin-supplier/admin-supplier.component';
+import { AdSupplierAddComponent } from './admin/admin-supplier/ad-supplier-add/ad-supplier-add.component';
+import { AdSupplierEditComponent } from './admin/admin-supplier/ad-supplier-edit/ad-supplier-edit.component';
+import { AdSupplierSeeComponent } from './admin/admin-supplier/ad-supplier-see/ad-supplier-see.component';
+import { AdminWorkerComponent } from './admin/admin-worker/admin-worker.component';
+import { AdWorkerSeeComponent } from './admin/admin-worker/ad-worker-see/ad-worker-see.component';
+import { AdWorkerEditComponent } from './admin/admin-worker/ad-worker-edit/ad-worker-edit.component';
+import { AdWorkerAddComponent } from './admin/admin-worker/ad-worker-add/ad-worker-add.component';
 
 
 const routes: Routes = [
@@ -22,7 +42,38 @@ const routes: Routes = [
   {path: 'product/:product-info', component: ProductpageComponent},
   {path: 'accessory/:product-info', component: ProductpageComponent},
 
-  {path: 'admin', component: AdminComponent}
+  //{path: 'admin', component: AdminComponent},
+  {
+    path: 'admin', component: AdminComponent, children: [
+      { path: '', redirectTo: '/adproduct', pathMatch: 'full' },
+      { path: 'adproduct', component: AdminProductComponent },
+      { path: 'adproduct/detail', component: AdProductSeeComponent },
+      { path: 'adproduct/edit', component: AdProductEditComponent },
+      { path: 'adproduct/add', component: AdProductAddComponent },
+
+      { path: 'addetail', component: AdminAccessoriesComponent },
+      { path: 'addetail/detail', component: AdAccessoriesSeeComponent },
+      { path: 'addetail/edit', component: AdAccessoriesEditComponent },
+      { path: 'addetail/add', component: AdAccessoriesAddComponent },
+
+      { path: 'adcustomer', component: AdminCustomerComponent },
+      { path: 'adcustomer/detail', component: AdCustomerSeeComponent },
+      { path: 'adcustomer/edit', component: AdCustomerEditComponent },
+      { path: 'adcustomer/add', component: AdCustomerAddComponent },
+
+      { path: 'adworker', component: AdminWorkerComponent },
+      { path: 'adworker/detail', component: AdWorkerSeeComponent },
+      { path: 'adworker/edit', component: AdWorkerEditComponent },
+      { path: 'adworker/add', component: AdWorkerAddComponent },
+
+      { path: 'adsupplier', component: AdminSupplierComponent },
+      { path: 'adsupplier/detail', component: AdSupplierSeeComponent },
+      { path: 'adsupplier/edit', component: AdSupplierEditComponent },
+      { path: 'adsupplier/add', component: AdSupplierAddComponent },
+
+    ]
+  },
+
 ];
 
 @NgModule({

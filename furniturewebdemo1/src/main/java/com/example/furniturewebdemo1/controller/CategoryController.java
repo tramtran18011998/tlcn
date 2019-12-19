@@ -2,6 +2,7 @@ package com.example.furniturewebdemo1.controller;
 
 import com.example.furniturewebdemo1.exception.ResourceNotFoundException;
 import com.example.furniturewebdemo1.model.Category;
+import com.example.furniturewebdemo1.repository.CategoryRepository;
 import com.example.furniturewebdemo1.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,18 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @GetMapping("/category")
     public List<Category> getAllCategory(){
         return categoryService.findAllCategory();
+    }
+
+    @GetMapping("/category/list/{id}")
+    public List<Category> getAllByCategoryTypes(@PathVariable(value = "id") long id){
+        List<Category> categories = categoryRepository.findByCategoryTypes(id);
+        return categories;
     }
 
     @GetMapping("/category/{id}")

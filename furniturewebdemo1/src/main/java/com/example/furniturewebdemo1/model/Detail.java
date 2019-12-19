@@ -46,6 +46,9 @@ public class Detail implements Serializable {
     @Column(name = "material")
     private String material;
 
+    @Column(name = "description")
+    private String description;
+
     @OneToMany(mappedBy = "detail", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("detail")
     private Collection<DetailImage> detailImages;
