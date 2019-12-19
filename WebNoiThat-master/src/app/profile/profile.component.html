@@ -1,0 +1,37 @@
+<app-header></app-header>
+
+<div class="form-wrap">
+    <div class="profile"><img src="https://html5book.ru/wp-content/uploads/2016/10/profile-image.png">
+        <h1>Nguyen Thi A</h1>
+    </div>
+    <form method="post" action="form.php">
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="radio">
+            <span>Giới tính</span>
+            <label>
+                <input type="radio" name="sex" value="мужской">Nữ
+                <div class="radio-control male"></div>
+            </label>
+            <label>
+                <input type="radio" name="sex" value="женский">Nam
+                <div class="radio-control female"></div>
+            </label>
+        </div>
+        <div>
+            <label for="email">E-mail</label>
+            <input type="email" name="email" required>
+        </div>
+        <div>
+            <label for="country">Địa chỉ</label>
+            <select name="country">
+                <option>TPHCM</option>
+                <option value="Россия">Hà Nội</option>
+            </select>
+            <div class="select-arrow"></div>
+        </div>
+        <button type="submit">Update profile</button>
+    </form>
+</div>

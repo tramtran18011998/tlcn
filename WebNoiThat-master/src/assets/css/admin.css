@@ -35,9 +35,8 @@ a:focus {
 } */
 
 .navbar-light {
-    background: #1C2428;
+    background: #1C2424;
     position: relative;
-    z-index: 2;
 }
 
 .navbar-btn {
@@ -71,7 +70,7 @@ span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #3A4A51;
+    background:  #1C2429;
     color: #fff;
     transition: all 0.3s;
     float: left;
@@ -126,7 +125,7 @@ span {
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
+    padding: 10px 20px 5px;
     background: #1C2428;
 }
 
@@ -137,7 +136,7 @@ span {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #1C2428;
+    /* border-bottom: 1px solid #1C2428; */
 }
 
 #sidebar ul li a {
@@ -220,7 +219,7 @@ a.article:hover {
     width: 100%;
     position: fixed;
     float: right;
-    /* z-index: -1; */
+    z-index: 1;
 }
 
 img.img-profile {
@@ -255,7 +254,7 @@ button#sidebarCollapse {
     position: absolute;
     right: 0;
     top: 55px;
-    /* z-index: -2; */
+    /*z-index: -2;*/
     /* float: right; */
 }
 
@@ -315,4 +314,8 @@ button#sidebarCollapse {
     ul.nav.navbar-nav.navbar-right {
         background-color: #6d7fcc;
     }
+}
+
+.dropdown-menu {
+    display: none;
 }

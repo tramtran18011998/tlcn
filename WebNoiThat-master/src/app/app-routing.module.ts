@@ -29,6 +29,7 @@ import { AdminWorkerComponent } from './admin/admin-worker/admin-worker.componen
 import { AdWorkerSeeComponent } from './admin/admin-worker/ad-worker-see/ad-worker-see.component';
 import { AdWorkerEditComponent } from './admin/admin-worker/ad-worker-edit/ad-worker-edit.component';
 import { AdWorkerAddComponent } from './admin/admin-worker/ad-worker-add/ad-worker-add.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path: 'cart', component: CartComponent},
   {path: 'product/:product-info', component: ProductpageComponent},
   {path: 'accessory/:product-info', component: ProductpageComponent},
+  {path: 'profile', component: ProfileComponent},
 
   //{path: 'admin', component: AdminComponent},
   {

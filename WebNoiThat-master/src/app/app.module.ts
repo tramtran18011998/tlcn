@@ -48,6 +48,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSliderModule} from '@angular/material/slider';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import {MatSliderModule} from '@angular/material/slider';
     AdWorkerAddComponent,
     AdWorkerEditComponent,
     AdWorkerSeeComponent,
+    ProfileComponent,
    
     
   ],
