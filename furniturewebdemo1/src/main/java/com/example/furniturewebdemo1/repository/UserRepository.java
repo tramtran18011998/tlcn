@@ -27,4 +27,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "where r.name = 'ROLE_USER' and u.instatus ='1'",nativeQuery = true)
     List<User> listCustomer();
 
+    //get customer_id from user_id
+    @Query(value = "select c.customer_id from user as u inner join customer as c on u.user_id = c.user_id where u.user_id=:user_id",nativeQuery = true)
+    long getCustomerId(@Param("user_id") long user_id);
 }

@@ -2,42 +2,75 @@
 <app-adnavbar></app-adnavbar>
 <div class="card">
     <div class="card-body">
-        <h3 class="card-title">Thông tin khách hàng: Phạm Gia Thịnh</h3>
+        <h3 class="card-title">Thông tin khách hàng: {{customer.name}}</h3>
         <p class="card-description">
             Thông tin chi tiết
         </p>
         <div class="row" style="margin-bottom: 16px;">
             <div class="col-3" style="text-align: right; padding-right: 16px;">
-                <img src="assets/image/product.jpg" style="border-radius: 50%;" width="250px" height="250px" />
+                <img src="{{customer.imageUrl}}" style="border-radius: 50%;" width="250px" height="250px" />
             </div>
             <div class="col-9">
                 <table class="table">
                     <tr>
                         <td>Họ tên:</td>
-                        <td>Phạm Gia Thịnh</td>
+                        <td >{{customer.name}}</td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td>giathinhpham98@gmail.com</td>
+                        <td >{{customer.email}}</td>
                     </tr>
                     <tr>
                         <td>Điện thoại:</td>
-                        <td>0355561188</td>
+                        <td>{{customer.phonenumber}}</td>
                     </tr>
-                    <tr>
-                        <td>Giảm giá</td>
-                        <td>100%</td>
-                    </tr>
+                    
                     <tr>
                         <td>Địa chỉ:</td>
-                        <td>484 Lê Văn Việt, phường Tăng Nhơn Phú A, Quận 9, TpHCM</td>
+                        <td>{{customer.address}}</td>
                     </tr>
+
+                    <tr>
+                        <td>Cung cấp từ:</td>
+                        <td>{{customer.provider}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Mật khẩu:</td>
+                        <td>{{customer.password}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <div *ngIf="instatus==1;else show"><td>Hoạt động</td></div>                       
+                        <ng-template #show><td>Đã khóa</td></ng-template>
+                    </tr>
+
+                    <tr>
+                        <td>Tạo ngày:</td>
+                        <td>{{customer.createdDate}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Cập nhật ngày:</td>
+                        <td>{{customer.updatedDate}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Chiết khấu:</td>
+                        <td>{{customer2.discount}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Loại khách hàng:</td>
+                        <td>{{customer2.customertype_id}}</td>
+                    </tr>
+                  
                 </table>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <a href="#" class="btn btn-primary btn-rounded">Sửa thông tin khách hàng</a>
-            <a href="#" class="btn btn-success btn-rounded" style="margin-left: 16px;color: white;">Về trang quản lí khách hàng</a>
+        <div class="row justify-content-center">           
+            <a routerLink="/admin/adcustomer" class="btn btn-success btn-rounded" style="margin-left: 16px;color: white;">Về trang quản lí khách hàng</a>
         </div>
     </div>
 </div>

@@ -10,6 +10,8 @@ import {tap} from 'rxjs/operators'
 export class CustomerService {
 
   private baseUrl = 'http://localhost:8080/api/customer';
+  private urlUser = 'http://localhost:8080/api/user';
+  private url = 'http://localhost:8080/api/customeruser';
 
   private _refresh = new Subject<void>();
   private headers= new HttpHeaders({
@@ -28,8 +30,16 @@ export class CustomerService {
     return this.http.get(`${this.baseUrl}`, this.options);
   }
   
+  getIdByUserId(id: number): Observable<any> {
+    return this.http.get(`${this.url}/${id}`, this.options);
+  }
+
   getById(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`, this.options);
+  }
+
+  getUserById(id: number): Observable<any> {
+    return this.http.get(`${this.urlUser}/${id}`, this.options);
   }
 
   

@@ -1,11 +1,13 @@
 package com.example.furniturewebdemo1.controller;
 
 import com.example.furniturewebdemo1.exception.ResourceNotFoundException;
+import com.example.furniturewebdemo1.model.Customer;
 import com.example.furniturewebdemo1.model.Supplier;
 import com.example.furniturewebdemo1.model.User;
 import com.example.furniturewebdemo1.repository.UserRepository;
 import com.example.furniturewebdemo1.security.CurrentUser;
 import com.example.furniturewebdemo1.security.UserPrincipal;
+import com.example.furniturewebdemo1.service.CustomerService;
 import com.example.furniturewebdemo1.service.SupplierService;
 import com.example.furniturewebdemo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CustomerService customerService;
+
     @GetMapping("/user/me")
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) throws ResourceNotFoundException {
         return userRepository.findById(userPrincipal.getId())
@@ -49,6 +54,25 @@ public class UserController {
     @GetMapping("/api/customer")
     public List<User> getCustomer(){
         return userRepository.listCustomer();
+    }
+
+    @GetMapping("/api/user/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+        User user=userService.findByUserId(id).orElseThrow(()-> new ResourceNotFoundException("User not found"));
+        return ResponseEntity.ok().body(user);
+    }
+
+    @GetMapping("/api/customeruser/{user_id}")
+    public long getSupplierById(@PathVariable(value = "user_id") long user_id) throws ResourceNotFoundException {
+
+        long id = userRepository.getCustomerId(user_id);
+        return id;
+    }
+
+    @GetMapping("/api/customer/{id}")
+    public ResponseEntity<Customer> getCustomerById(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+        Customer customer=customerService.findCustomerId(id).orElseThrow(()-> new ResourceNotFoundException("Customer not found"));
+        return ResponseEntity.ok().body(customer);
     }
 
 }
