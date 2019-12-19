@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,5 +21,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "where u.email = :email",nativeQuery = true)
     String findByRoleUser(@Param("email") String email);
 
+
+    //get list customer: role: ROLE_USER
+    @Query(value = "select u.user_id,u.name, u.email, u.image_url, u.email_verified, u.password, u.address,u.phone_number, u.instatus,u.provider,u.provider_id, u.created_date, u.updated_date from (role as r inner join user_roles as ur on r.role_id = ur.role_id) inner join user as u on ur.user_id = u.user_id\n" +
+            "where r.name = 'ROLE_USER' and u.instatus ='1'",nativeQuery = true)
+    List<User> listCustomer();
 
 }

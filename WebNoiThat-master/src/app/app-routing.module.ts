@@ -50,27 +50,27 @@ const routes: Routes = [
       { path: '', redirectTo: '/adproduct', pathMatch: 'full' },
       { path: 'adproduct', component: AdminProductComponent },
       { path: 'adproduct/detail', component: AdProductSeeComponent },
-      { path: 'adproduct/edit', component: AdProductEditComponent },
+      { path: 'adproduct/edit/:id', component: AdProductEditComponent },
       { path: 'adproduct/add', component: AdProductAddComponent },
 
       { path: 'addetail', component: AdminAccessoriesComponent },
       { path: 'addetail/detail', component: AdAccessoriesSeeComponent },
-      { path: 'addetail/edit', component: AdAccessoriesEditComponent },
+      { path: 'addetail/edit/:id', component: AdAccessoriesEditComponent },
       { path: 'addetail/add', component: AdAccessoriesAddComponent },
 
       { path: 'adcustomer', component: AdminCustomerComponent },
       { path: 'adcustomer/detail', component: AdCustomerSeeComponent },
-      { path: 'adcustomer/edit', component: AdCustomerEditComponent },
+      { path: 'adcustomer/edit/:id', component: AdCustomerEditComponent },
       { path: 'adcustomer/add', component: AdCustomerAddComponent },
 
       { path: 'adworker', component: AdminWorkerComponent },
       { path: 'adworker/detail', component: AdWorkerSeeComponent },
-      { path: 'adworker/edit', component: AdWorkerEditComponent },
+      { path: 'adworker/edit/:id', component: AdWorkerEditComponent },
       { path: 'adworker/add', component: AdWorkerAddComponent },
 
       { path: 'adsupplier', component: AdminSupplierComponent },
       { path: 'adsupplier/detail', component: AdSupplierSeeComponent },
-      { path: 'adsupplier/edit', component: AdSupplierEditComponent },
+      { path: 'adsupplier/edit/:id', component: AdSupplierEditComponent },
       { path: 'adsupplier/add', component: AdSupplierAddComponent },
 
     ]

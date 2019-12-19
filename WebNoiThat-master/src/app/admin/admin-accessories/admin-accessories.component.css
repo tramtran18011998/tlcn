@@ -248,7 +248,7 @@ button#sidebarCollapse {
 }
 
 .card {
-    margin: 10px;
+    margin: 17px;
     width: calc(100% - 270px);
     display: flex;
     position: absolute;
@@ -316,3 +316,11 @@ button#sidebarCollapse {
     }
 }
 
+table {
+    width: 100%;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }

@@ -1,10 +1,12 @@
 package com.example.furniturewebdemo1.controller;
 
 import com.example.furniturewebdemo1.exception.ResourceNotFoundException;
+import com.example.furniturewebdemo1.model.Supplier;
 import com.example.furniturewebdemo1.model.User;
 import com.example.furniturewebdemo1.repository.UserRepository;
 import com.example.furniturewebdemo1.security.CurrentUser;
 import com.example.furniturewebdemo1.security.UserPrincipal;
+import com.example.furniturewebdemo1.service.SupplierService;
 import com.example.furniturewebdemo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 
 @RestController
@@ -40,6 +43,12 @@ public class UserController {
 
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+    }
+
+
+    @GetMapping("/api/customer")
+    public List<User> getCustomer(){
+        return userRepository.listCustomer();
     }
 
 }
