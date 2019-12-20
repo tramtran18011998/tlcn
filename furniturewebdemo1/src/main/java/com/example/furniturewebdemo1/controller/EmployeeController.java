@@ -3,10 +3,7 @@ package com.example.furniturewebdemo1.controller;
 import com.example.furniturewebdemo1.exception.AppException;
 import com.example.furniturewebdemo1.exception.ResourceNotFoundException;
 
-import com.example.furniturewebdemo1.model.Employee;
-import com.example.furniturewebdemo1.model.Role;
-import com.example.furniturewebdemo1.model.RoleName;
-import com.example.furniturewebdemo1.model.User;
+import com.example.furniturewebdemo1.model.*;
 import com.example.furniturewebdemo1.payload.LoginE;
 import com.example.furniturewebdemo1.payload.LoginRequest;
 import com.example.furniturewebdemo1.repository.RoleRepository;
@@ -24,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -57,13 +55,15 @@ public class EmployeeController {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-
         Role userRole = roleRepository.findByName(RoleName.ROLE_EMPLOYEE)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
-
+        long a=1;
+        user.setInstatus(a);
+        user.setProvider(AuthProvider.local);
         user.setRoles(Collections.singleton(userRole));
         user.setImageUrl(userService.storeAvatar1(file));
+        user.setCreatedDate(new Date());
 
         userService.save(user);
         employee.setUser(user);
@@ -71,18 +71,25 @@ public class EmployeeController {
 
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
-//    @PostMapping(value = "/employee/admin",produces = MediaType.IMAGE_PNG_VALUE)
-//    public  ResponseEntity<Employee> createAdmin(@Valid @ModelAttribute Employee employee,@RequestParam("file") MultipartFile file) throws IOException {
-//        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
-//        Role userRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-//                .orElseThrow(() -> new AppException("User Role not set."));
-//
-//        employee.setRoles(Collections.singleton(userRole));
-//        employee.setAvatar(employeeService.storeAvatar1(file));
-//
-//        employeeService.save(employee);
-//        return new ResponseEntity<>(employee, HttpStatus.CREATED);
-//    }
+    @PostMapping(value = "/employee/admin",produces = MediaType.IMAGE_PNG_VALUE)
+    public  ResponseEntity<Employee> createAdmin(@Valid @ModelAttribute Employee employee, @Valid @ModelAttribute User user,@RequestParam("file") MultipartFile file) throws IOException {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Role userRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+                .orElseThrow(() -> new AppException("User Role not set."));
+
+        user.setRoles(Collections.singleton(userRole));
+        user.setImageUrl(userService.storeAvatar1(file));
+
+        user.setCreatedDate(new Date());
+
+        long a=1;
+        user.setInstatus(a);
+        user.setProvider(AuthProvider.local);
+        userService.save(user);
+        employee.setUser(user);
+        employeeService.save(employee);
+        return new ResponseEntity<>(employee, HttpStatus.CREATED);
+    }
 
     //fix error 406: [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
     @ResponseBody
@@ -91,27 +98,19 @@ public class EmployeeController {
         return "acceptable MIME type:" + MediaType.APPLICATION_JSON_VALUE;
     }
 
-//    @PutMapping("/employee/{id}")
-//    public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") long id, @Valid @RequestBody Employee employee) throws ResourceNotFoundException {
-//        Employee currentEmployee= employeeService.findEmployeeId(id).orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
-//
-//        currentEmployee.setUsername(employee.getUsername());
-//        currentEmployee.setPassword(passwordEncoder.encode(employee.getPassword()));
-//        currentEmployee.setFullname(employee.getFullname());
-//        currentEmployee.setAddress(employee.getAddress());
-//        currentEmployee.setEmail(employee.getEmail());
-//        currentEmployee.setAvatar(employee.getAvatar());
-//        currentEmployee.setPhoneNumber(employee.getPhoneNumber());
-//        currentEmployee.setBonus(employee.getBonus());
-//        currentEmployee.setPosition(employee.getPosition());
-//        currentEmployee.setSalary(employee.getSalary());
-//        currentEmployee.setRoles(employee.getRoles());
-//
-//        employeeService.save(currentEmployee);
-//
-//        return ResponseEntity.ok(currentEmployee);
-//
-//    }
+    @PutMapping("/employee/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") long id, @Valid @RequestBody Employee employee) throws ResourceNotFoundException {
+        Employee currentEmployee= employeeService.findEmployeeId(id).orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
+
+        currentEmployee.setBonus(employee.getBonus());
+        currentEmployee.setPosition(employee.getPosition());
+        currentEmployee.setSalary(employee.getSalary());
+
+        employeeService.save(currentEmployee);
+
+        return ResponseEntity.ok(currentEmployee);
+
+    }
 
     @DeleteMapping("/employee/{id}")
     public ResponseEntity<Employee> deleteEmployee(@PathVariable(value = "id") long id) throws ResourceNotFoundException {

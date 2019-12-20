@@ -13,6 +13,7 @@ export class AdCustomerSeeComponent implements OnInit {
 
   customer: User = new User();
   customer2: Customer = new Customer();
+  provider: string;
   id: number;
   id2: number;
 
@@ -26,6 +27,8 @@ export class AdCustomerSeeComponent implements OnInit {
     this.customerService.getUserById(this.id).subscribe(data=>{
       console.log(data)
       this.customer=data;
+      this.provider= this.customer.provider;
+      console.log("provider"+this.provider);
       this.instatus = this.customer.instatus;
     },error=>console.log(error));
 
@@ -37,8 +40,6 @@ export class AdCustomerSeeComponent implements OnInit {
         this.customer2 = data;
       },error=>console.log(error));
     },error=>console.log(error));
-
-    
 
   }
 

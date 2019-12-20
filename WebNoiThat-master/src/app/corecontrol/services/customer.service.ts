@@ -12,6 +12,7 @@ export class CustomerService {
   private baseUrl = 'http://localhost:8080/api/customer';
   private urlUser = 'http://localhost:8080/api/user';
   private url = 'http://localhost:8080/api/customeruser';
+  private urlImgae = 'http://localhost:8080/customerimg';
 
   private _refresh = new Subject<void>();
   private headers= new HttpHeaders({
@@ -19,7 +20,12 @@ export class CustomerService {
     //'x-access-token':localStorage.getItem('token'),
     //'Authorization': 'Bearer' + localStorage.getItem('token')
   })
+  private headImg = new HttpHeaders({
+    //'x-access-token':localStorage.getItem('token'),
+    //'Authorization': 'Bearer' + localStorage.getItem('token')
+  })
   private options = { headers: this.headers };
+  private optionsImg = {headers: this.headImg};
   
   constructor(private http: HttpClient) { }
  
@@ -30,6 +36,10 @@ export class CustomerService {
     return this.http.get(`${this.baseUrl}`, this.options);
   }
   
+  getImg(imgname: string): Observable<any>{
+    return this.http.get(`${this.urlImgae}/${imgname}`, this.optionsImg);
+  }
+
   getIdByUserId(id: number): Observable<any> {
     return this.http.get(`${this.url}/${id}`, this.options);
   }

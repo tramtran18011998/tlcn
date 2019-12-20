@@ -27,6 +27,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api")
@@ -113,6 +114,9 @@ public class AuthController {
         user.setPassword(signUpRequest.getPassword());
         user.setProvider(AuthProvider.local);
 
+        user.setCreatedDate(new Date());
+        long a=1;
+        user.setInstatus(a);
 
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));

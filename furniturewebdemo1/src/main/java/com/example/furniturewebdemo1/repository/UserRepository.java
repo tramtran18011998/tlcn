@@ -30,4 +30,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //get customer_id from user_id
     @Query(value = "select c.customer_id from user as u inner join customer as c on u.user_id = c.user_id where u.user_id=:user_id",nativeQuery = true)
     long getCustomerId(@Param("user_id") long user_id);
+
+    //get list employee: role: ROLE_EMPLOYEE
+    @Query(value = "select u.user_id,u.name, u.email, u.image_url, u.email_verified, u.password, u.address,u.phone_number, u.instatus,u.provider,u.provider_id, u.created_date, u.updated_date from (role as r inner join user_roles as ur on r.role_id = ur.role_id) inner join user as u on ur.user_id = u.user_id\n" +
+            "where r.name = 'ROLE_EMPLOYEE' and u.instatus ='1'",nativeQuery = true)
+    List<User> listEmployee();
+
+    //get customer_id from user_id
+    @Query(value = "select e.employee_id from user as u inner join employee as e on u.user_id = e.user_id where u.user_id=:user_id",nativeQuery = true)
+    long getEmployeeId(@Param("user_id") long user_id);
+
 }
