@@ -6,9 +6,9 @@ export  class User {
     password: string;
     emailVerified: boolean;
     address: string;
-    phonenumber: string;
+    phoneNumber: string;
     createdDate: Date;
-    updatedDate: Date;
+    lastModifiedDate: Date;
     provider: string;
     providerId: string;
     instatus: number;

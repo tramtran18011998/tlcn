@@ -3,19 +3,34 @@
 <div class="card" style="margin: 16px 0;">
     <div class="card-body">
         <h3 class="card-title">Thêm Nhân Viên</h3>
-        <form class="forms-sample">
+        <form [formGroup]="addForm" (ngSubmit)="onSubmitCreate(addForm)">
             <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="ten-phu-kien">Tên Nhân Viên (bắt buộc)</label>
-                    <input type="text" class="form-control" id="ten-nv" placeholder="Tên nhân viên">
+                    <input type="text" class="form-control" name="name" required
+                    [ngClass]="{'is-invalid':addForm.get('name').touched && addForm.get('name').invalid }"
+                    formControlName="name" id="name" placeholder="Tên nhân viên">
                     <small class="text-danger" id="validate-ten-nv"></small>
+                    <div *ngIf="addForm.get('name').touched && addForm.get('name').invalid"
+                       class="invalid-feedback">
+                       <div *ngIf="addForm.controls.name.errors.required">Tên không được để trống
+                       </div>
+                       <div *ngIf="addForm.controls.name.errors.pattern">Tên không hợp lệ</div>
+                   </div>
 
 
                 </div>
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="ten-phu-kien">Email (bắt buộc)</label>
-                    <input type="text" class="form-control" id="email-nv" placeholder="Email">
-                    <small class="text-danger" id="validate-email-nv"></small>
+                    <input type="text" class="form-control" name="email" required placeholder="Email"
+                        [ngClass]="{'is-invalid':addForm.get('email').touched && addForm.get('email').invalid}" formControlName="email"
+                        id="email" placeholder="Email">
+                    <small class="text-danger" id="validate-email-ncc"></small>
+                    <div *ngIf="addForm.get('email').touched && addForm.get('email').invalid" class="invalid-feedback">
+                        <div *ngIf="addForm.controls.email.errors.required">Email không được để trống
+                        </div>
+                        <div *ngIf="addForm.controls.email.errors.email">Email không hợp lệ</div>
+                    </div>
 
 
                 </div>
@@ -23,51 +38,119 @@
             <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="ten-phu-kien">Số điện thoại</label>
-                    <input type="text" class="form-control" id="sdt-nv" placeholder="Số điện thoại">
+                    <input type="text" class="form-control" name="phoneNumber" required
+                        [ngClass]="{'is-invalid':addForm.get('phoneNumber').touched && addForm.get('phoneNumber').invalid }"
+                        formControlName="phoneNumber" id="phoneNumber" placeholder="Số điện thoại">
                     <small class="text-danger" id="validate-so-dien-thoai"></small>
-
+            
+                    <div *ngIf="addForm.get('phoneNumber').touched && addForm.get('phoneNumber').invalid" class="invalid-feedback">
+                        <div *ngIf="addForm.controls.phoneNumber.errors.required"> Nhập số điện
+                            thoại</div>
+                        <div *ngIf="addForm.controls.phoneNumber.errors.pattern || 
+                                addForm.controls.phoneNumber.errors.minlength || 
+                                addForm.controls.phoneNumber.errors.maxlength">Số điện thoại không hợp lệ</div>
+            
+                    </div>
 
                 </div>
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="ten-phu-kien">Chức vụ</label>
-                    <input type="text" class="form-control" id="sdt-nv" placeholder="Chức vụ">
-                    <small class="text-danger" id="validate-so-dien-thoai"></small>
+                    <input type="text" class="form-control" name="position" required            
+                    formControlName="position" id="position" placeholder="Chức vụ">
+                    <small class="text-danger" ></small>
 
 
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Địa chỉ</label>
+                <input type="text" class="form-control" name="address" required            
+                formControlName="address" id="address" rows="3" placeholder="Địa chỉ">
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password"
+                    id="password" formControlName="password"  placeholder="Mật khẩu"
+                    [ngClass]="{'is-invalid':addForm.get('password').touched && addForm.get('password').invalid }"
+                    required />
+                <div *ngIf="addForm.get('password').touched && addForm.get('password').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="addForm.controls.password.errors.required">Mật khẩu không được để
+                        trống</div>
+                    <div *ngIf="addForm.controls.password.errors.minlength">Mật khẩu tối thiếu 6 kí
+                        tự
+                    </div>
+                    <div *ngIf="addForm.controls.password.errors.pattern">Các kí tự: [a-z], [A-Z],
+                        [0-9], @ được cho phép</div>
+                    <div *ngIf="addForm.controls.password.errors.pattern">Các kí tự: [a-z], [A-Z],
+                        [0-9], - . _ được cho phép</div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="">Địa chỉ</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Địa chỉ"></textarea>
+                
+                <input type="password" id="password2" name="password2" class="form-control"
+                    formControlName="password2" placeholder="Nhập lại Mật khẩu"
+                    [ngClass]="{'is-invalid':addForm.get('password2').touched && addForm.get('password2').invalid}"
+                    required>
+
+                <div *ngIf="addForm.get('password2').touched && addForm.get('password2').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="addForm.controls.password2.errors.required">Khách cần nhập lại mật
+                        khẩu
+                    </div>
+                    <div *ngIf="addForm.controls.password2.errors.NoPassswordMatch">Mật khẩu không
+                        chính
+                        xác</div>
+
+                </div>
 
             </div>
+            
             <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="ten-phu-kien">Lương</label>
-                    <input type="text" class="form-control" id="sdt-khach-hang" placeholder="Lương">
+                    <input type="text" class="form-control" name="salary" required            
+                    formControlName="salary" id="salary">
                 </div>
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="ten-phu-kien">Tiền thưởng</label>
-                    <input type="text" class="form-control" id="sdt-khach-hang" placeholder="Tiền thưởng">
+                    <input type="text" class="form-control" name="bonus" required            
+                    formControlName="bonus" id="bonus">
                 </div>
             </div>
-            <div class="form-row">
+
+            <!-- <div class="form-row">
                 <div class="form-group col-md-6 col-sm-12">
                     <label for="exampleFormControlFile1">Ảnh</label>
                     <div class="input-group input-file" name="Fichier1">
                         <span class="input-group-btn">
-                    <button class="btn btn-primary btn-choose" type="button">Choose</button>
-                </span>
+                            <button class="btn btn-primary btn-choose" (click)="selectImage($event)" type="file">Choose</button>
+                        </span>
                         <input type="text" class="form-control" placeholder='Chọn ảnh' />
                         <span class="input-group-btn">
-                    <button class="btn btn-warning btn-reset" type="button">Reset</button>
-                </span>
+                            <button class="btn btn-warning btn-reset" type="button">Reset</button>
+                        </span>
                     </div>
                 </div>
+            </div> -->
+
+            <div class="form_row">
+                <div class="form-group col-md-6 col-sm-12">
+                    <label>Hình ảnh :</label>
+                    <input style="height: 50px; background: green;" type="file" alt="accept" class="form-control" (change)="selectImage($event)" />
+                </div>           
+            
             </div>
-            <a href="#" class="btn btn-primary btn-rounded" style="color: white;"> Về Trang
-                Quản Lý Nhân Viên</a>
-            <input type="submit" class="btn btn-primary btn-rounded" style="margin-left: 5px;" id="btn-submit" value="Lưu" />
+
+            <div style="margin-top: 10px;">
+                <a href="#" class="btn btn-primary btn-rounded" style="color: white;"> Về Trang
+                    Quản Lý Nhân Viên</a>
+                <input type="submit" class="btn btn-success btn-rounded" style="margin-left: 5px;" id="btn-submit" value="Lưu" />
+            </div>
+            
         </form>
     </div>
 </div>

@@ -63,7 +63,7 @@
            
             <a routerLink="/admin/adsupplier" class="btn btn-primary btn-rounded" style="color: white;"> Về Trang
                 Quản Lý Nhà Cung Cấp</a>
-            <input type="submit" class="btn btn-success btn-rounded" style="margin-left: 5px;"  value="Lưu" />
+            <input type="submit" class="btn btn-success btn-rounded" style="margin-left: 5px;" [disabled]="!addForm.valid"  value="Lưu" />
         </form>
     </div>
 </div>

@@ -17,4 +17,5 @@ public interface EmployeeService {
 //    Employee findByUsername(String username);
     String storeAvatar(MultipartFile file, long id) throws IOException;
     String storeAvatar1(MultipartFile file) throws IOException;
+
 }

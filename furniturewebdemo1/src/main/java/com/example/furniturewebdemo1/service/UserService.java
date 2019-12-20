@@ -15,4 +15,5 @@ public interface UserService {
 
     String storeAvatar(MultipartFile file, long id) throws IOException;
     String storeAvatar1(MultipartFile file) throws IOException;
+    String storeAuto() throws IOException;
 }

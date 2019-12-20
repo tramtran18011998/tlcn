@@ -118,6 +118,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/employee/*").permitAll()
                 .antMatchers("/api/employee/*/*").permitAll()
                 .antMatchers("/api/*").permitAll()
+                .antMatchers("/api/employeeuser/*").permitAll()
                 .antMatchers("/api/*/*").permitAll()
                 .antMatchers("/api/*/*/*").permitAll()
                 .antMatchers("/api/user/*").permitAll()

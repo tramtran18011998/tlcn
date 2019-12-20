@@ -7,8 +7,11 @@ import com.example.furniturewebdemo1.model.*;
 import com.example.furniturewebdemo1.payload.LoginE;
 import com.example.furniturewebdemo1.payload.LoginRequest;
 import com.example.furniturewebdemo1.repository.RoleRepository;
+import com.example.furniturewebdemo1.repository.UserRepository;
 import com.example.furniturewebdemo1.service.EmployeeService;
 import com.example.furniturewebdemo1.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,6 +34,9 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
@@ -39,9 +45,14 @@ public class EmployeeController {
     @Autowired
     RoleRepository roleRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+
+    //get list user role employee
     @GetMapping("/employee")
-    public List<Employee> getAllEmployee() {
-        return employeeService.findAllEmployee();
+    public List<User> getAllEmployee() {
+        //return employeeService.findAllEmployee();
+        return userRepository.listEmployee();
     }
 
     @GetMapping("/employee/{id}")
@@ -53,6 +64,7 @@ public class EmployeeController {
     @PostMapping(value = "/employee", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<?> createEmployee(@Valid @ModelAttribute Employee employee, @Valid @ModelAttribute User user, @RequestParam("file") MultipartFile file) throws IOException {
 
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Role userRole = roleRepository.findByName(RoleName.ROLE_EMPLOYEE)
@@ -62,6 +74,12 @@ public class EmployeeController {
         user.setInstatus(a);
         user.setProvider(AuthProvider.local);
         user.setRoles(Collections.singleton(userRole));
+
+//        if(file.isEmpty()){
+////            user.setImageUrl(userService.storeAuto());
+////        }else {
+////            user.setImageUrl(userService.storeAvatar1(file));
+////        }
         user.setImageUrl(userService.storeAvatar1(file));
         user.setCreatedDate(new Date());
 
@@ -102,13 +120,53 @@ public class EmployeeController {
     public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") long id, @Valid @RequestBody Employee employee) throws ResourceNotFoundException {
         Employee currentEmployee= employeeService.findEmployeeId(id).orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
 
-        currentEmployee.setBonus(employee.getBonus());
-        currentEmployee.setPosition(employee.getPosition());
-        currentEmployee.setSalary(employee.getSalary());
+        //logger.info("i: "+String.valueOf(currentEmployee));
+        if(employee.getPosition()!=null){
+            currentEmployee.setPosition(employee.getPosition());
+        }
+
+        if(employee.getBonus()!=0){
+            currentEmployee.setBonus(employee.getBonus());
+        }
+        if(employee.getSalary()!=0){
+            currentEmployee.setSalary(employee.getSalary());
+        }
 
         employeeService.save(currentEmployee);
 
         return ResponseEntity.ok(currentEmployee);
+
+    }
+    @PutMapping("/employeeuser/{user_id}")
+    public ResponseEntity<User> updateUser(@PathVariable(value = "user_id") long user_id, @Valid @RequestBody User user) throws ResourceNotFoundException {
+        User currentUser= userRepository.findById(user_id).orElseThrow(()-> new ResourceNotFoundException("User not found"));
+
+        if(user.getInstatus()!=null){
+            currentUser.setInstatus(user.getInstatus());
+        }
+        if(user.getPassword()!=null){
+            currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+
+        currentUser.setLastModifiedDate(new Date());
+
+        if(user.getName()!=null){
+            currentUser.setName(user.getName());
+        }
+        if(user.getEmail()!=null){
+            currentUser.setEmail(user.getEmail());
+        }
+        if(user.getAddress()!=null){
+            currentUser.setAddress(user.getAddress());
+        }
+        if(user.getPhoneNumber()!=null){
+            currentUser.setPhoneNumber(user.getPhoneNumber());
+        }
+
+        logger.info(currentUser.getAddress());
+        userRepository.save(currentUser);
+
+        return ResponseEntity.ok(currentUser);
 
     }
 
@@ -139,5 +197,41 @@ public class EmployeeController {
 //
 //        employeeService.save(currentEmployee);
 //        return new ResponseEntity<>(currentEmployee, HttpStatus.CREATED);
+//    }
+
+
+    public long getIdE(long id){
+        long id2 = userRepository.getEmployeeId(id);
+        return id2;
+    }
+
+//    @PutMapping("/employee/{id}")
+//    public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") long id, @Valid @RequestBody Employee employee ,@RequestBody User user) throws ResourceNotFoundException {
+//
+//        Employee currentEmployee= employeeService.findEmployeeId(id).orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
+//        //logger.info("i: "+String.valueOf(currentEmployee));
+//        currentEmployee.setBonus(employee.getBonus());
+//        currentEmployee.setPosition(employee.getPosition());
+//        currentEmployee.setSalary(employee.getSalary());
+//        employeeService.save(currentEmployee);
+//        logger.info("i: "+String.valueOf(currentEmployee.getPosition()));
+//
+//        long id2 = getIdE(id);
+//        logger.info(String.valueOf(id2));
+//        User currentUser= userRepository.findById(id2).orElseThrow(()-> new ResourceNotFoundException("User not found"));
+//        //logger.info(String.valueOf(currentUser));
+//        currentUser.setInstatus(user.getInstatus());
+//        currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+//        currentUser.setLastModifiedDate(new Date());
+//        currentUser.setName(user.getName());
+//        currentUser.setEmail(user.getEmail());
+//        currentUser.setAddress(user.getAddress());
+//        //currentUser.setProvider(user.getProvider());
+//        currentUser.setPhoneNumber(user.getPhoneNumber());
+//        logger.info(currentUser.getAddress());
+//        userRepository.save(currentUser);
+//
+//        return ResponseEntity.ok(currentEmployee);
+//
 //    }
 }

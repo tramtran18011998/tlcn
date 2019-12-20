@@ -10,14 +10,26 @@ import {tap} from 'rxjs/operators'
 export class EmployeeService {
 
   private baseUrl = 'http://localhost:8080/api/employee';
+  private url = 'http://localhost:8080/api/employeeuser';
+  private urlUser = 'http://localhost:8080/api/user';
+
+  private urlU = 'http://localhost:8080/api/employeeuser';
+
 
   private _refresh = new Subject<void>();
   private headers= new HttpHeaders({
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin':'*'
     //'x-access-token':localStorage.getItem('token'),
     //'Authorization': 'Bearer' + localStorage.getItem('token')
   })
+  private headerImg= new HttpHeaders({
+    //'x-access-token':localStorage.getItem('token'),
+    //'Authorization': 'Bearer' + localStorage.getItem('token')
+  })
+
   private options = { headers: this.headers };
+  private optionsImg = { headers: this.headerImg };
   
   constructor(private http: HttpClient) { }
  
@@ -28,13 +40,22 @@ export class EmployeeService {
     return this.http.get(`${this.baseUrl}`, this.options);
   }
   
+  //get object bu Id
   getById(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`, this.options);
   }
+  getUserById(id: number): Observable<any> {
+    return this.http.get(`${this.urlUser}/${id}`, this.options);
+  }
 
+  //get Id by Id
+  getIdByUserId(id: number): Observable<any> {
+    return this.http.get(`${this.url}/${id}`, this.options);
+  }
   
-  createNew(ob: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, ob, this.options).pipe(
+
+  createNew(ob: FormData): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`, ob, this.optionsImg).pipe(
       tap(()=> {
         this._refresh.next();
       })
@@ -43,6 +64,14 @@ export class EmployeeService {
 
   update(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/${id}`, value, this.options).pipe(
+      tap(()=> {
+        this._refresh.next();
+      })
+    );
+  }
+
+  updateUser(id: number, value: any): Observable<Object> {
+    return this.http.put(`${this.urlU}/${id}`, value, this.options).pipe(
       tap(()=> {
         this._refresh.next();
       })

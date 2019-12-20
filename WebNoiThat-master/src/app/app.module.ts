@@ -50,6 +50,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSliderModule} from '@angular/material/slider';
 import { ProfileComponent } from './profile/profile.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

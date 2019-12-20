@@ -19,7 +19,7 @@ import java.util.Set;
 @Setter
 @Table(name = "user")
 @NoArgsConstructor
-
+@JsonIgnoreProperties({"employees","customers"})
 public class User extends DateAudit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,7 +50,7 @@ public class User extends DateAudit implements Serializable {
     @Column(name = "instatus")
     private Long instatus;
 
-    @NotNull
+
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
@@ -58,9 +58,11 @@ public class User extends DateAudit implements Serializable {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
     private Set<Customer> customers;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
     private Set<Employee> employees;
 
 

@@ -81,5 +81,22 @@ public class UserServiceImpl implements UserService {
         return file.getOriginalFilename();
     }
 
+    @Override
+    public String storeAuto() throws IOException {
+        //String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = "avatar.png";
+        File convertFile = new File("uploads/employees/"+fileName);
+        convertFile.createNewFile();
+
+//        try (FileOutputStream fout = new FileOutputStream(convertFile))
+//        {
+//            fout.write(file.getBytes());
+//        }
+//        catch (Exception exe)
+//        {
+//            exe.printStackTrace();
+//        }
+        return fileName;
+    }
 
 }
