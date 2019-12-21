@@ -4,7 +4,7 @@
     <div class="card-body">
         <h3 class="card-title">Sửa Nhân Viên</h3>
         
-        <div class="row">
+        <!-- <div class="row">
 
             <div class="col-md-6 col-sm-12 form-group" style="text-align: center; padding-right: 16px;margin: 20px auto;">
                 <img src="http://localhost:8080/employeeimg/{{employeeUser.imageUrl}}" style="border-radius: 50%;" width="250px"
@@ -12,20 +12,43 @@
                 
             </div>
             <div class="col-md-6 col-sm-12 form-group" style="text-align: left; padding-right: 16px;margin: auto;">
-                <form class="forms-sample"  (ngSubmit)="onSubmitUpload()">
+                <form class="forms-sample"  (ngSubmit)="onSubmitUpload()"> 
                     <div class="input-group input-file" name="Fichier1">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary btn-choose" type="button">UPLOAD</button>
+                            <button  class="btn btn-primary btn-choose" type="submit">UPLOAD</button>
                         </span>
                     </div>
-                </form>
+                </form> 
                     
                 
             </div>
-        </div>
+        </div> -->
         
         <form class="forms-sample"  (ngSubmit)="onSubmit()">
-            
+            <div class="row">
+
+                <div class="col-md-6 col-sm-12 form-group" style="text-align: center; padding-right: 16px;margin: 20px auto;">
+                    <img src="http://localhost:8080/employeeimg/{{employeeUser.imageUrl}}" style="border-radius: 50%;" width="250px"
+                        height="250px" />
+                    
+                </div>
+                <div class="col-md-6 col-sm-12 form-group" style="text-align: left; padding-right: 16px;margin: auto;">
+                    <!-- <form class="forms-sample"  (ngSubmit)="onSubmitUpload()"> -->
+                        <!-- <div class="input-group input-file" name="Fichier1">
+                            <span class="input-group-btn">
+                                <button  class="btn btn-primary btn-choose" type="button">UPLOAD</button> 
+                                <input style="height: 50px; background: green;" type="file" alt="accept" class="form-control" (change)="selectImage($event)" />
+                            </span>
+                        </div> -->
+                        <div class="file btn btn-lg btn-primary" style="position: relative;overflow: hidden;">Upload
+							<input style="position: absolute; font-size: 50px;opacity: 0;right: 0; top: 0;" type="file" name="file" (change)="selectImage($event)"/>
+                        </div>
+                        <!-- <input style="height: 50px; background: green;" type="file" alt="accept" class="form-control" (change)="selectImage($event)" /> -->
+                    <!-- </form> -->
+                        
+                    
+                </div>
+            </div>
             <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="ten-phu-kien">Tên Nhân Viên (bắt buộc)</label>

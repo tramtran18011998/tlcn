@@ -3,6 +3,7 @@ package com.example.furniturewebdemo1.controller;
 import com.example.furniturewebdemo1.exception.ResourceNotFoundException;
 
 import com.example.furniturewebdemo1.model.CustomerType;
+import com.example.furniturewebdemo1.repository.CustomerTypeRepository;
 import com.example.furniturewebdemo1.service.CustomerTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,9 @@ public class CustomerTypeController {
     @Autowired
     private CustomerTypeService customerTypeService;
 
+    @Autowired
+    private CustomerTypeRepository customerTypeRepository;
+
     @GetMapping("/customertype")
     public List<CustomerType> getAllCustomerType(){
         return customerTypeService.findAllCustomerType();
@@ -26,6 +30,13 @@ public class CustomerTypeController {
     @GetMapping("/customertype/{id}")
     public ResponseEntity<CustomerType> getCustomerTypeById(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
         CustomerType customerType=customerTypeService.findCustomerTypeById(id).orElseThrow(()-> new ResourceNotFoundException("Supplier not found"));
+        return ResponseEntity.ok().body(customerType);
+    }
+
+    //get by name
+    @GetMapping("/customertypename/{name}")
+    public ResponseEntity<CustomerType> getCustomerTypeByName(@PathVariable(value = "name") String name) throws ResourceNotFoundException {
+        CustomerType customerType=customerTypeRepository.getCustomerTypeByName(name);
         return ResponseEntity.ok().body(customerType);
     }
 

@@ -1,6 +1,8 @@
+import { CustomerType } from './customertype';
+
 export  class Customer {
     id: number;
     discount: string;
-    customertype_id: string;
+    customerType: CustomerType;
     user_id: string;
 }

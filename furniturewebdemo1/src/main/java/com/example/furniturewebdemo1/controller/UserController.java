@@ -102,17 +102,31 @@ public class UserController {
     public @ResponseBody ResponseEntity<User> updateUser(@PathVariable(value = "id") long id, @Valid @RequestBody User user) throws ResourceNotFoundException {
         User currentUser= userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("User not found"));
 
-        logger.info(String.valueOf(currentUser));
-        currentUser.setInstatus(user.getInstatus());
-        currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(user.getInstatus()!=null){
+            currentUser.setInstatus(user.getInstatus());
+        }
+        if(user.getPassword()!=null){
+            currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+
         currentUser.setLastModifiedDate(new Date());
-        currentUser.setName(user.getName());
-        currentUser.setEmail(user.getEmail());
-        currentUser.setAddress(user.getAddress());
-        //currentUser.setProvider(user.getProvider());
-        currentUser.setPhoneNumber(user.getPhoneNumber());
+
+        if(user.getName()!=null){
+            currentUser.setName(user.getName());
+        }
+        if(user.getEmail()!=null){
+            currentUser.setEmail(user.getEmail());
+        }
+        if(user.getAddress()!=null){
+            currentUser.setAddress(user.getAddress());
+        }
+        if(user.getPhoneNumber()!=null){
+            currentUser.setPhoneNumber(user.getPhoneNumber());
+        }
+
         logger.info(currentUser.getAddress());
         userRepository.save(currentUser);
+
         return ResponseEntity.ok(currentUser);
 
     }
@@ -126,6 +140,14 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
+    //upload img employee
+    @PutMapping("api/employeeimg/{id}")
+    public ResponseEntity<User> uploadImgEmp(@RequestParam("file") MultipartFile file, @PathVariable(value = "id") long id) throws IOException, ResourceNotFoundException {
+        User user= userService.findByUserId(id).orElseThrow(()-> new ResourceNotFoundException("User not found"));
+        user.setImageUrl(userService.storeAvatarE(file,id));
+        userService.save(user);
+        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+    }
 
     ///////////////////////SERVE IMAGE
     //serve image employee
@@ -175,6 +197,26 @@ public class UserController {
     public ResponseEntity<Customer> getCustomerById(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
         Customer customer=customerService.findCustomerId(id).orElseThrow(()-> new ResourceNotFoundException("Customer not found"));
         return ResponseEntity.ok().body(customer);
+    }
+
+    @PutMapping("/api/customer/{id}")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable(value = "id") long id, @Valid @RequestBody Customer customer) throws ResourceNotFoundException {
+        Customer currentCustomer= customerService.findCustomerId(id).orElseThrow(()-> new ResourceNotFoundException("Customer not found"));
+
+        //CustomerType customerType = new CustomerType();
+        //logger.info("i: "+String.valueOf(currentEmployee));
+        if(customer.getCustomerType()!=null){
+            currentCustomer.setCustomerType(customer.getCustomerType());
+        }
+
+        if(customer.getDiscount()!=0){
+            currentCustomer.setDiscount(customer.getDiscount());
+        }
+
+        customerService.save(currentCustomer);
+
+        return ResponseEntity.ok(currentCustomer);
+
     }
 
     /////////////////////////EMPLOYEE HANDLING

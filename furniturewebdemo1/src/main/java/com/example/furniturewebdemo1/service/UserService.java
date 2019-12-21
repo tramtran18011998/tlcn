@@ -13,7 +13,11 @@ public interface UserService {
     User save(User user);
     void delete(User user);
 
+    //customer
     String storeAvatar(MultipartFile file, long id) throws IOException;
+
+    //employee
+    String storeAvatarE(MultipartFile file, long id) throws IOException;
     String storeAvatar1(MultipartFile file) throws IOException;
     String storeAuto() throws IOException;
 }

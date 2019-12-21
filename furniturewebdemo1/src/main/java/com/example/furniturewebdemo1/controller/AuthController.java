@@ -3,6 +3,7 @@ package com.example.furniturewebdemo1.controller;
 
 import com.example.furniturewebdemo1.exception.AppException;
 import com.example.furniturewebdemo1.exception.BadRequestException;
+import com.example.furniturewebdemo1.exception.ResourceNotFoundException;
 import com.example.furniturewebdemo1.model.*;
 import com.example.furniturewebdemo1.payload.ApiResponse;
 import com.example.furniturewebdemo1.payload.LoginRequest;
@@ -11,6 +12,7 @@ import com.example.furniturewebdemo1.repository.RoleRepository;
 import com.example.furniturewebdemo1.repository.UserRepository;
 import com.example.furniturewebdemo1.security.TokenProvider;
 import com.example.furniturewebdemo1.service.CustomerService;
+import com.example.furniturewebdemo1.service.CustomerTypeService;
 import com.example.furniturewebdemo1.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -45,6 +48,8 @@ public class AuthController {
 
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private CustomerTypeService customerTypeService;
 
     @Autowired
     RoleRepository roleRepository;
@@ -100,7 +105,7 @@ public class AuthController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) throws ResourceNotFoundException {
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new BadRequestException("Email address already in use.");
         }
@@ -129,7 +134,10 @@ public class AuthController {
         User result = userService.save(user);
 
         Customer customer = new Customer();
+        //Optional<CustomerType> customerType = customerTypeService.findCustomerTypeById(1);
+        CustomerType customerType= customerTypeService.findCustomerTypeById(1).orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
         customer.setUser(user);
+        customer.setCustomerType(customerType);
         customerService.save(customer);
 
 

@@ -14,6 +14,7 @@ export class EmployeeService {
   private urlUser = 'http://localhost:8080/api/user';
 
   private urlU = 'http://localhost:8080/api/employeeuser';
+  private urlImg = 'http://localhost:8080/api/employeeimg';
 
 
   private _refresh = new Subject<void>();
@@ -78,6 +79,13 @@ export class EmployeeService {
     );
   }
 
+  updateImg(fd: FormData,id: number): Observable<Object> {
+    return this.http.put(`${this.urlImg}/${id}`, fd, this.optionsImg).pipe(
+      tap(()=> {
+        this._refresh.next();
+      })
+    );
+  }
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`,this.options);
   }
