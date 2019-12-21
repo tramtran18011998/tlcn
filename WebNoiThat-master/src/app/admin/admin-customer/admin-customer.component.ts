@@ -23,7 +23,7 @@ export class AdminCustomerComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   private customers: User[]=[];
-  private customerTypes: CustomerType[]=[];
+  customerTypes: CustomerType[]=[];
   private customerC: Customer= new Customer();
   private idCus: number;
   customerType: CustomerType = new CustomerType();
@@ -71,16 +71,10 @@ export class AdminCustomerComponent implements OnInit {
       console.log(this.idCus);
       this.customerService.getById(this.idCus).subscribe(data =>{
         this.customerC = data;
-        this.customerTypeA = this.customerC.customerType
+        this.customerTypeA = this.customerC.customerType;
+        this.customerType = this.customerC.customerType;
         console.log("cus: ", this.customerC.customerType);
 
-        //get customertype ob by name
-        // this.customerTypeService.getByName(this.customerTypeA.name).subscribe(data =>{
-          
-        //   this.customerC.customerType = data;
-        //   console.log("data: ",this.customerC.customerType);
-          
-        // })
       });
     });
     
@@ -90,7 +84,7 @@ export class AdminCustomerComponent implements OnInit {
     
     console.log(this.customerC.customerType);
     
-    this.customerTypeService.getByName(String(this.customerC.customerType) ).subscribe(data =>{
+    this.customerTypeService.getByName(this.customerType.name).subscribe(data =>{
       console.log(data);
       this.customerC.customerType = data;
       this.customerService.update(this.idCus,this.customerC).subscribe(data =>{     
@@ -98,11 +92,5 @@ export class AdminCustomerComponent implements OnInit {
       });
     })
 
-    // console.log(this.customerC.customerType);
-    // console.log("data2: ",this.customerC.customerType);
-    
-    // this.customerService.update(this.idCus,this.customerC).subscribe(data =>{     
-    //   console.log("data3: ", data);
-    // });
   }
 }
