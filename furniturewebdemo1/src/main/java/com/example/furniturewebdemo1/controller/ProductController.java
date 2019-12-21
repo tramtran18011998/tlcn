@@ -126,7 +126,7 @@ public class ProductController {
 //        return new ResponseEntity<>(productImage, HttpStatus.CREATED);
 //    }
     @PostMapping(value = "/productimg", produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<ProductImage> createProduct(@RequestParam("files") MultipartFile[] files, @Valid @ModelAttribute ProductImage productImage) throws IOException, ResourceNotFoundException {
+    public ResponseEntity<?> createProduct(@RequestParam("files") MultipartFile[] files) throws IOException, ResourceNotFoundException {
 
         List<String> imglist = uploadFiles(files);
         imglist.forEach(a -> {
@@ -135,7 +135,7 @@ public class ProductController {
             productImageRepositpry.save(productImage1);
         });
 
-        return new ResponseEntity<>(productImage, HttpStatus.CREATED);
+        return (ResponseEntity<?>) ResponseEntity.ok();
     }
     //fix error 406: [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
     @ResponseBody
