@@ -20,6 +20,7 @@ export class AdminWorkerComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   private employees: User[]=[];
+  cus: User = new User();
 
   constructor(private employeeService: EmployeeService, private router: Router) { }
 
@@ -51,4 +52,32 @@ export class AdminWorkerComponent implements OnInit {
     this.router.navigate(['/admin/adworker/edit',id]);
   }
 
+  delete(id: number){
+
+    
+    this.cus.instatus = 0; 
+    
+
+    Swal.fire({
+      title: 'Bạn có chắc chắn muốn xóa không?',
+      text: 'Trạng thái hoạt động sẽ khóa!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý xóa!'
+    }).then((result) => {
+      if (result.value) {
+        this.employeeService.updateUser(id,this.cus).subscribe(data => {
+          console.log(data);
+          this.getList();
+        });
+        Swal.fire(
+          'Đã xóa!',
+          'Đã khóa trạng thái.',
+          'success'
+        );
+      }
+    });
+  }
 }

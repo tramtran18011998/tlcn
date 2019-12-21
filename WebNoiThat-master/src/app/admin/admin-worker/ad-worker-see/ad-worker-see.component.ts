@@ -18,6 +18,7 @@ export class AdWorkerSeeComponent implements OnInit {
   id2: number;
 
   instatus = 0;
+  imgState : boolean = false;
 
   constructor(private acroute: ActivatedRoute, private employeeService: EmployeeService) { }
 
@@ -28,6 +29,10 @@ export class AdWorkerSeeComponent implements OnInit {
       console.log(data)
       this.employeeUser=data;
       this.instatus = this.employeeUser.instatus;
+
+      if(this.employeeUser.imageUrl!= null){
+        this.imgState = true;
+      }
     },error=>console.log(error));
 
     this.employeeService.getIdByUserId(this.id).subscribe(data=>{

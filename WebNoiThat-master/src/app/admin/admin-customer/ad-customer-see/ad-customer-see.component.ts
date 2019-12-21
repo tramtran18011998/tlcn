@@ -18,6 +18,7 @@ export class AdCustomerSeeComponent implements OnInit {
   id: number;
   id2: number;
 
+  imgState : boolean = false;
   instatus = 0;
   customerType: CustomerType = new CustomerType();
 
@@ -32,6 +33,9 @@ export class AdCustomerSeeComponent implements OnInit {
       this.provider= this.customer.provider;
       console.log("provider"+this.provider);
       this.instatus = this.customer.instatus;
+      if(this.customer.imageUrl!= null){
+        this.imgState = true;
+      }
     },error=>console.log(error));
 
     this.customerService.getIdByUserId(this.id).subscribe(data=>{

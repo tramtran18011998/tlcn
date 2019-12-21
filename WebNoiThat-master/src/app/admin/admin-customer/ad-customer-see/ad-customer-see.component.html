@@ -8,11 +8,16 @@
         </p>
         <div class="row" style="margin-bottom: 16px;">
             <div class="col-3" style="text-align: right; padding-right: 16px;">
-                <div *ngIf="provider=='local';else showImg">
-                    <img src="http://localhost:8080/customerimg/{{customer.imageUrl}}" style="border-radius: 50%;" width="250px" height="250px" />
-                </div>
+                <div *ngIf="imgState;else showEl">
+                    <div *ngIf="provider=='local';else showImg">
+                        <img src="http://localhost:8080/customerimg/{{customer.imageUrl}}" style="border-radius: 50%;" width="250px" height="250px" />
+                    </div>
+                    
+                    <ng-template let-file pTemplate="file" #showImg><img src="{{customer.imageUrl}}" style="border-radius: 50%;" width="250px" height="250px" /></ng-template>
+                </div>                       
+                <ng-template et-file pTemplate="file" #showEl><img src="../../../../assets/image/avatar.png" style="border-radius: 50%;" width="250px" height="250px" /></ng-template>
+
                 
-                <ng-template let-file pTemplate="file" #showImg><img src="{{customer.imageUrl}}" style="border-radius: 50%;" width="250px" height="250px" /></ng-template>
                 
                 
             </div>
