@@ -75,8 +75,8 @@
             <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="">Loại phòng :</label>
-                    <select style="width: 210px;" class="form-control" name="supplier" 
-                    formControlName="supplier" id="supplier" #mySelectType (change)='onOptionsSelected(mySelectType.value)'>
+                    <select style="width: 210px;" class="form-control" 
+                      #mySelectType (change)='onOptionsSelected(mySelectType.value)'>
                         <option *ngFor="let categoryType of categoryTypes " [value]="categoryType.id">
                             {{categoryType.name}}
                         </option>

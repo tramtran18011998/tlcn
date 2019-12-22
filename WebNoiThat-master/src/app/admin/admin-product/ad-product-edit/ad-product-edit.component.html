@@ -3,61 +3,111 @@
 <div class="card" style="margin: 16px 0;">
     <div class="card-body">
         <h3 class="card-title">Sửa Sản Phẩm</h3>
-        <form class="forms-sample">
-            <div class="form-row">
-                <div class="col-md-6 col-sm-12 form-group">
-                    <label for="ten-san-pham">Tên Sản Phẩm (bắt buộc)</label>
-                    <input type="text" class="form-control" id="ten-san-pham" placeholder="Tên sản phẩm" value="Bàn">
-                    <small class="text-danger" id="validate-ten-san-pham"></small>
-
-
-                </div>
-                <div class="col-md-6 col-sm-12 form-group">
-                    <label>Ngày Thêm</label>
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker2'>
-                            <input type='date' class="form-control" value="2018-11-06" />
-                            <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+        
+            <form class="forms-sample"  (ngSubmit)="onSubmit()">
+                <div class="row">
+                
+                    <div class="col-12" style="margin-left: 20px;">
+                        <div class="row">
+                            <div *ngFor="let productImg of productImgs; let i = index ">
+                                <div style="padding: 20px;">
+                                    <img style="width: 200px;height: 200px; margin: 0;padding: 0;" class="img-fluid mx-auto d-block"
+                                        src="http://localhost:8080/api/productimage/{{productImg.name}}" alt="slide {{i}}">
+                                </div>
+                            </div>
+                
+                        </div>
+                        <div style="text-align: center; padding-right: 16px;margin: auto;">
+                
+                            <div class="file btn btn-lg btn-primary" style="position: relative;overflow: hidden;">Upload
+                                <input style="position: absolute; font-size: 50px;opacity: 0;right: 0; top: 0;" type="file" name="file"
+                                    (change)="selectImage($event)" />
+                            </div>
+                
                         </div>
                     </div>
-                    <script type="text/javascript">
-                        $(function() {
-                            $('#datetimepicker2').datetimepicker({
-                                locale: 'ru'
-                            });
-                        });
-                    </script>
+                    
+                    
                 </div>
-            </div>
             <div class="form-row">
-                <div class="form-group col-md-6 col-sm-12">
-                    <label for="gia-tien">Giá (bắt buộc)</label>
-                    <input type="number" class="form-control" id="gia-tien" placeholder="150.000" value="450000">
-                    <small class="text-danger" id="validate-gia-tien"></small>
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label>Tên Sản phẩm</label>
+                    <input type="text" class="form-control" required [(ngModel)]="product.name" name="name" >
                 </div>
+
                 <div class="form-group col-md-6 col-sm-12">
-                    <label for="xac-nhan-mat-khau">Phần Trăm Khuyến Mãi</label>
-                    <input type="number" class="form-control" id="" placeholder="10%" value="0">
+                    <label >Giá thành:</label>
+                    <input type="number" class="form-control" required [(ngModel)]="product.price" name="price">
 
                 </div>
             </div>
+
+            
+
             <div class="form-row">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label>Màu sắc :</label>
+                    <input type="text" class="form-control" required [(ngModel)]="product.color" name="color" >
+                </div>
+
                 <div class="form-group col-md-6 col-sm-12">
-                    <label for="exampleFormControlFile1">Ảnh</label>
-                    <div class="input-group input-file" name="Fichier1">
-                        <span class="input-group-btn">
-                    <button class="btn btn-primary btn-choose" type="button">Choose</button>
-                </span>
-                        <input type="text" class="form-control" placeholder='Chọn ảnh' />
-                        <span class="input-group-btn">
-                    <button class="btn btn-warning btn-reset" type="button">Reset</button>
-                </span>
-                    </div>
+                    <label >Giá khuyến mãi :</label>
+                    <input type="number" class="form-control" required [(ngModel)]="product.discountPrice" name="discountPrice">
+
                 </div>
             </div>
-            <a href="#" class="btn btn-primary btn-rounded" style="color: white;"> Về Trang
+
+            <div class="form-row">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label>Mô tả :</label>
+                    <textarea type="text" class="form-control" required [(ngModel)]="product.description" name="description" ></textarea>
+                </div>
+
+                <div class="form-group col-md-6 col-sm-12">
+                    <label >Chất liệu :</label>
+                    <input type="text" class="form-control" required [(ngModel)]="product.material" name="material">
+
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label>Số lượng :</label>
+                    <input type="number" class="form-control" required [(ngModel)]="product.quantity" name="quantity" >
+                </div>
+
+                <div class="form-group col-md-6 col-sm-12">
+                    <label >Kích thước :</label>
+                    <input type="text" class="form-control" required [(ngModel)]="product.size" name="size">
+
+                </div>
+            </div>
+
+            <!-- <div class="form-row">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Loại sản phẩm :</label>
+                    <select style="width: 210px;" class="form-control" name="category" [(ngModel)]="product.category.id"
+                    id="category">
+                        <option *ngFor="let category of categories " [value]="category.id">
+                            {{category.name}}
+                        </option>
+                    </select>
+                
+                </div>
+
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Nhà cung cấp :</label>
+            
+                    <select style="width: 210px;" class="form-control" name="supplier" [(ngModel)]="product.supplier.id" id="supplier">
+                        <option *ngFor="let supplier of suppliers " [value]="supplier.id">
+                            {{supplier.name}}
+                        </option>
+                    </select>
+                </div>
+
+            </div> -->
+            
+            <a routerLink="/admin/adproduct" class="btn btn-primary btn-rounded" style="color: white;"> Về Trang
                 Quản Lý Sản Phẩm</a>
             <input type="submit" class="btn btn-primary btn-rounded" style="margin-left: 5px;" id="btn-submit" value="Lưu" />
         </form>

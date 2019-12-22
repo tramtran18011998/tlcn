@@ -118,14 +118,7 @@ export class AdProductAddComponent implements OnInit {
 
   onSubmitCreate(addForm: FormGroup){
     //console.log(addForm.controls['category'].value);
-    this.supplierService.getById(addForm.controls['supplier'].value).subscribe(data =>{
-      this.supplier = data;
-      this.productA.supplier = this.supplier;
-    });
-
-    this.categoryService.getById(addForm.controls['category'].value).subscribe(data => {
-      this.productA.supplier = data;
-    });
+    
     this.productA.name = addForm.controls['name'].value;
     this.productA.price = addForm.controls['price'].value;
     this.productA.color = addForm.controls['color'].value;
@@ -135,28 +128,43 @@ export class AdProductAddComponent implements OnInit {
     this.productA.quantity = addForm.controls['quantity'].value;
     this.productA.size = addForm.controls['size'].value;
 
+    console.log(this.productA.supplier);
+    console.log(this.productA.category);
+
+    this.supplierService.getById(addForm.controls['supplier'].value).subscribe(data =>{
+      this.supplier = data;
+      this.productA.supplier = this.supplier;
+
+      this.categoryService.getById(addForm.controls['category'].value).subscribe(data => {
+        this.productA.category = data;
+
+        this.productService.createNew(this.productA).subscribe(data => {
+          console.log("pro:",data);
+          this.product = data;
+          console.log(this.product);
+          console.log(this.product.id);
+          if(this.urls.length>0){
+            
+            //formData.append('files', this.urls);
+            for (let i = 0; i < this.urls.length; i++) {
+              const formData = new FormData();
+              formData.append('file', this.urls[i]);
+              console.log(this.urls[i]);
+              this.productService.createProductImg2(this.product.id,formData).subscribe(data => {
+                console.log(data);
+              })
+            }
+            
+          }
+          
+        })
+      });
+
+    });
+
     
 
-    this.productService.createNew(this.productA).subscribe(data => {
-      console.log("pro:",data);
-      this.product = data;
-      console.log(this.product);
-      console.log(this.product.id);
-      if(this.urls.length>0){
-        
-        //formData.append('files', this.urls);
-        for (let i = 0; i < this.urls.length; i++) {
-          const formData = new FormData();
-          formData.append('file', this.urls[i]);
-          console.log(this.urls[i]);
-          this.productService.createProductImg2(this.product.id,formData).subscribe(data => {
-            console.log(data);
-          })
-        }
-        
-      }
-      
-    })
+    
   }
 
 }
