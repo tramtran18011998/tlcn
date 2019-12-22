@@ -35,7 +35,7 @@ a:focus {
 } */
 
 .navbar-light {
-    background: #1C2428;
+    background: #1C2424;
     position: relative;
 }
 
@@ -70,7 +70,7 @@ span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #3A4A51;
+    background:  #1C2429;
     color: #fff;
     transition: all 0.3s;
     float: left;
@@ -111,7 +111,7 @@ span {
 }
 
 #sidebar.active ul ul a {
-    padding: 10px !important;
+    padding: 30px 30px !important;
 }
 
 #sidebar.active a[aria-expanded="false"]::before,
@@ -125,7 +125,7 @@ span {
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
+    padding: 10px 20px 5px;
     background: #1C2428;
 }
 
@@ -135,8 +135,8 @@ span {
 }
 
 #sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #1C2428;
+    padding: 30px 30px;
+    /* border-bottom: 1px solid #1C2428; */
 }
 
 #sidebar ul li a {
@@ -219,7 +219,7 @@ a.article:hover {
     width: 100%;
     position: fixed;
     float: right;
-    z-index: -1;
+    z-index: 1;
 }
 
 img.img-profile {
@@ -248,18 +248,14 @@ button#sidebarCollapse {
 }
 
 .card {
-    margin: 10px;
+    margin: 17px;
     width: calc(100% - 270px);
     display: flex;
     position: absolute;
     right: 0;
     top: 55px;
-    z-index: -2;
+    /*z-index: -2;*/
     /* float: right; */
-}
-
-a.btn.btn-primary.btn-rounded {
-    color: white;
 }
 
 
@@ -318,4 +314,80 @@ a.btn.btn-primary.btn-rounded {
     ul.nav.navbar-nav.navbar-right {
         background-color: #6d7fcc;
     }
+}
+
+table {
+    width: 100%;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+
+    /* show 3 items */
+    .carouselPrograms .carousel-inner .active,
+    .carouselPrograms .carousel-inner .active + .carousel-item,
+    .carouselPrograms .carousel-inner .active + .carousel-item + .carousel-item {
+        display: block;
+    }
+
+    .carouselPrograms .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+    .carouselPrograms .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
+    .carouselPrograms .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+        transition: none;
+    }
+
+    .carouselPrograms .carousel-inner .carousel-item-next,
+    .carouselPrograms .carousel-inner .carousel-item-prev {
+        position: relative;
+        transform: translate3d(0, 0, 0);
+    }
+
+    .carouselPrograms .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: absolute;
+        top: 0;
+        right: -33.333%;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* left or forward direction */
+    .carouselPrograms .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+    .carouselPrograms .carousel-item-next.carousel-item-left + .carousel-item,
+    .carouselPrograms .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+    .carouselPrograms .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+
+    /* farthest right hidden item must be abso position for animations */
+    .carouselPrograms .carousel-inner .carousel-item-prev.carousel-item-right {
+        position: absolute;
+        top: 0;
+        left: 0%;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* right or prev direction */
+    .carouselPrograms .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+    .carouselPrograms .carousel-item-prev.carousel-item-right + .carousel-item,
+    .carouselPrograms .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+    .carouselPrograms .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon{
+  background-color:red;
+}
 }

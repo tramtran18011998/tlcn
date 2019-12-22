@@ -1,10 +1,7 @@
 package com.example.furniturewebdemo1.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,6 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "detail")
 @JsonIgnoreProperties({"invoiceDetail_details","details"})
@@ -25,7 +23,7 @@ public class Detail implements Serializable {
     private long id;
 
     @Column(name = "name")
-    @NotNull
+
     private String name;
 
     @Column(name = "color")
@@ -59,6 +57,7 @@ public class Detail implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "detailtype_id")
+    @JsonIgnoreProperties("details")
     private DetailType detailType;
 
     @OneToMany(mappedBy = "detail", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

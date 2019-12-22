@@ -1,3 +1,6 @@
+import { Supplier } from './supplier';
+import { DetailType } from './detailtype';
+
 export  class Detail {
     id: number;
     name: string;
@@ -8,6 +11,6 @@ export  class Detail {
     price: number;
     quantity: number;
     size: string;
-    detailtype_id: number;
-    supplier_id: number;
+    detailType: DetailType;
+    supplier: Supplier;
 }

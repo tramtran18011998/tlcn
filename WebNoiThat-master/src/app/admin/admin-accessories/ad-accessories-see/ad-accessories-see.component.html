@@ -2,48 +2,75 @@
 <app-adnavbar></app-adnavbar>
 <div class="card pl-2 pr-2" style="margin: 16px 0;">
     <div class="card-body">
-        <h2>Thông tin chi tiết phụ kiện: Chân bàn</h2>
+        <h2>Thông tin chi tiết phụ kiện: </h2>
     </div>
     <div class="row">
-        <div class="col-12 mb-3">
-            <span class="label">Ảnh</span> <br>
-            <div class="row">
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
+        <div class="col-12" style="margin-left: 20px;" >
+            <div class="row" >
+                <div *ngFor="let detailImg of detailImgs; let i = index ">
+                    <div style="padding: 20px;">
+                        <img style="width: 200px;height: 200px; margin: 0;padding: 0;" class="img-fluid mx-auto d-block"
+                            src="http://localhost:8080/api/detailimage/{{detailImg.name}}" alt="slide {{i}}">
+                    </div>
+                </div>
+                
             </div>
+
         </div>
         <div class="col-12">
             <table class="table table-striped">
                 <tr>
-                    <td>ID Phụ kiện:</td>
-                    <td>01</td>
+                    <td style="width: 30%;">ID Phụ kiện:</td>
+                    <td>{{detail.id}}</td>
                 </tr>
                 <tr>
-                    <td>Tên Phụ kiện:</td>
-                    <td>Bàn</td>
+                    <td style="width: 30%;">Tên Phụ kiện:</td>
+                    <td>{{detail.name}}</td>
                 </tr>
                 <tr>
-                    <td>Giá:</td>
-                    <td>450.000đ</td>
+                    <td style="width: 30%;">Màu sắc:</td>
+                    <td>{{detail.color}}</td>
                 </tr>
                 <tr>
-                    <td>Phần Trăm Khuyến Mãi:</td>
-                    <td>0</td>
+                    <td style="width: 30%;">Giá:</td>
+                    <td>{{detail.price}}</td>
                 </tr>
                 <tr>
-                    <td>Ngày Thêm</td>
-                    <td>06/11/2018</td>
+                    <td style="width: 30%;">Giá giảm: </td>
+                    <td>{{detail.discountPrice}}</td>
                 </tr>
+                <tr>
+                    <td style="width: 30%;"> Chất liệu : </td>
+                    <td>{{detail.material}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">Kích thước :</td>
+                    <td>{{detail.size}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">Mô tả : </td>
+                    <td>{{detail.description}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">Số lượng :</td>
+                    <td>{{detail.quantity}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">Loại Phụ kiện :</td>
+                    <td>{{detail.detailType.name}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">Nhà cung cấp :</td>
+                    <td>{{detail.supplier.name}}</td>
+                </tr>
+
             </table>
         </div>
     </div>
     <div class="row justify-content-center mt-3 mb-4">
-        <a href="#" class="btn btn-primary btn-rounded" style="color: white;">Sửa
-            phụ kiện</a> &nbsp; &nbsp;
-        <a routerLink="adproduct" class="btn btn-primary btn-rounded" style="color: white;">Về trang quản lý phụ kiện</a>
+        <a routerLink="/admin/addetail/edit/{{detail.id}}" class="btn btn-primary btn-rounded" style="color: white;">Sửa
+            Phụ kiện</a> &nbsp; &nbsp;
+        <a routerLink="/admin/addetail" class="btn btn-success btn-rounded" style="margin-left: 16px;color: white;">Về
+            trang quản lí</a>
     </div>
 </div>

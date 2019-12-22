@@ -2,64 +2,113 @@
 <app-adnavbar></app-adnavbar>
 <div class="card" style="margin: 16px 0;">
     <div class="card-body">
-        <h3 class="card-title">Thêm Phụ Kiện</h3>
-        <form class="forms-sample">
+        <h3 class="card-title">Thêm Phụ kiện</h3>
+        <form [formGroup]="addForm" (ngSubmit)="onSubmitCreate(addForm)">
             <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
-                    <label for="ten-phu-kien">Tên Phụ Kiện (bắt buộc)</label>
-                    <input type="text" class="form-control" id="ten-phu-kien" placeholder="Tên phụ kiện">
-                    <small class="text-danger" id="validate-ten-phu-kien"></small>
-
-
-                </div>
-                <div class="col-md-6 col-sm-12 form-group">
-                    <label>Ngày Thêm</label>
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker2'>
-                            <input type='date' class="form-control" />
-                            <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                    <label for="ten-phu-kien">Tên Phụ kiện :</label>
+                    <input type="text" class="form-control" name="name" required
+                        [ngClass]="{'is-invalid':addForm.get('name').touched && addForm.get('name').invalid }"
+                        formControlName="name" id="name" >
+                    
+                    <div *ngIf="addForm.get('name').touched && addForm.get('name').invalid" class="invalid-feedback">
+                        <div *ngIf="addForm.controls.name.errors.required">Tên không được để trống
                         </div>
                     </div>
-                    <script type="text/javascript">
-                        $(function() {
-                            $('#datetimepicker2').datetimepicker({
-                                locale: 'ru'
-                            });
-                        });
-                    </script>
+
+
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6 col-sm-12">
-                    <label for="gia-tien">Giá (bắt buộc)</label>
-                    <input type="number" class="form-control" id="gia-tien" placeholder="150.000">
-                    <small class="text-danger" id="validate-gia-tien"></small>
-                </div>
-                <div class="form-group col-md-6 col-sm-12">
-                    <label for="xac-nhan-mat-khau">Phần Trăm Khuyến Mãi</label>
-                    <input type="number" class="form-control" id="" placeholder="10%">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="ten-phu-kien">Giá thành: </label>
+                    <input type="number" min="10000" step="1000" class="form-control" name="price" required
+                        [ngClass]="{'is-invalid':addForm.get('price').touched && addForm.get('price').invalid }"
+                        formControlName="price" id="price">
+                    <div *ngIf="addForm.get('price').touched && addForm.get('price').invalid" class="invalid-feedback">
+                        <div *ngIf="addForm.controls.price.errors.required"> Nhập giá</div>
+                        <div *ngIf="addForm.controls.price.errors.minlength">Giá thấp nhất 10000vnd</div>
+            
+                    </div>
 
                 </div>
             </div>
+
             <div class="form-row">
-                <div class="form-group col-md-6 col-sm-12">
-                    <label for="exampleFormControlFile1">Ảnh</label>
-                    <div class="input-group input-file" name="Fichier1">
-                        <span class="input-group-btn">
-                    <button class="btn btn-primary btn-choose" type="button">Choose</button>
-                </span>
-                        <input type="text" class="form-control" placeholder='Chọn ảnh' />
-                        <span class="input-group-btn">
-                    <button class="btn btn-warning btn-reset" type="button">Reset</button>
-                </span>
-                    </div>
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Màu sắc :</label>
+                <input type="text" class="form-control" name="color" required            
+                formControlName="color" id="color" rows="3">
+                </div>
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Giá khuyến mãi :</label>
+                <input type="number" step="1000" class="form-control" name="discountPrice" required            
+                formControlName="discountPrice" id="discountPrice" rows="3">
                 </div>
             </div>
-            <a href="#" class="btn btn-primary btn-rounded" style="color: white;"> Về Trang
-                Quản Lý Phụ Kiện</a>
-            <input type="submit" class="btn btn-primary btn-rounded" style="margin-left: 5px;" id="btn-submit" value="Lưu" />
+
+            <div class="form-row">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Mô tả :</label>
+                <textarea  type="text" class="form-control" name="description" required            
+                formControlName="description" id="description" rows="3"></textarea>
+                </div>
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Chất liệu :</label>
+                <input type="text" class="form-control" name="material" required            
+                formControlName="material" id="material" rows="3">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Số lượng :</label>
+                <input type="number" class="form-control" name="quantity" required            
+                formControlName="quantity" id="quantity" rows="3">
+                </div>
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Kích thước :</label>
+                <input type="text" class="form-control" name="size" required            
+                formControlName="size" id="size" rows="3">
+                
+                </div>
+            </div>
+
+            <div class="form-row">
+                
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Loại phụ kiện :</label>
+                    <select style="width: 210px;" class="form-control" name="detailType" formControlName="detailType" 
+                    #mySelectCate (change)='onOptionsSelectedCate(mySelectCate.value)' id="detailType">
+                        <option *ngFor="let detailType of detailTypes " [value]="detailType.id">
+                            {{detailType.name}}
+                        </option>
+                    </select>
+                
+                </div>
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="">Nhà cung cấp :</label>
+            
+                    <select style="width: 210px;" class="form-control" name="supplier" formControlName="supplier"
+                    #mySelectSup (change)='onOptionsSelectedSup(mySelectSup.value)' id="supplier">
+                        <option *ngFor="let supplier of suppliers " [value]="supplier.id">
+                            {{supplier.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6 col-sm-12">
+
+                    <input type='file' (change)="onSelectFile($event)" multiple>
+                    
+                </div>
+            </div>
+            
+            <a routerLink="/admin/addetail" class="btn btn-primary btn-rounded" style="color: white;"> Về Trang
+                Quản Lý Phụ kiện</a>
+            <input type="submit" class="btn btn-primary btn-rounded" style="margin-left: 5px;" id="btn-submit"
+                value="Lưu" />
         </form>
     </div>
 </div>

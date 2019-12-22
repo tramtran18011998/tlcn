@@ -8,16 +8,19 @@
                 <div class="row">
                 
                     <div class="col-12" style="margin-left: 20px;">
-                        <div class="row">
-                            <div *ngFor="let productImg of productImgs; let i = index ">
-                                <div style="padding: 20px;">
-                                    <img style="width: 200px;height: 200px; margin: 0;padding: 0;" class="img-fluid mx-auto d-block"
-                                        src="http://localhost:8080/api/productimage/{{productImg.name}}" alt="slide {{i}}">
+                       
+                            <div class="row">
+                                <div *ngFor="let productImg of productImgs; let i = index ">
+                                    <div style="padding: 20px;">
+                                        <img style="width: 200px;height: 200px; margin: 0;padding: 0;" class="img-fluid mx-auto d-block"
+                                            src="http://localhost:8080/api/productimage/{{productImg.name}}" alt="slide {{i}}">
+                                    </div>
                                 </div>
-                            </div>
+                    
+                            
                 
                         </div>
-                        <div style="text-align: center; padding-right: 16px;margin: auto;">
+                        <div style="text-align: center; padding-right: 16px;margin: 20px auto;">
                 
                             <div class="file btn btn-lg btn-primary" style="position: relative;overflow: hidden;">Upload
                                 <input style="position: absolute; font-size: 50px;opacity: 0;right: 0; top: 0;" type="file" name="file"

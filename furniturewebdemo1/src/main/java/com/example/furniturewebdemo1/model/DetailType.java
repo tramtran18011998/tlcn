@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 @Getter
@@ -14,8 +15,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @Entity
 @Table(name = "detailtype")
-@JsonIgnoreProperties({"detailType","details"})
-public class DetailType {
+public class DetailType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,6 +7,7 @@ import { SupplierService } from 'src/app/corecontrol/services/supplier.service';
 import { CategoryService } from 'src/app/corecontrol/services/category.service';
 import { Supplier } from 'src/app/corecontrol/models/supplier';
 import { Category } from 'src/app/corecontrol/models/category';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-ad-product-edit',
@@ -126,10 +127,18 @@ export class AdProductEditComponent implements OnInit {
           this.productService.createProductImg2(this.product.id,formData).subscribe(data => {
             console.log(data);
           })
+           
         }
+        
         
       }
     })
+
+    Swal.fire(
+      'Đã cập nhật!',
+      'Dữ liệu đã được sửa thành công.',
+      'success'
+    );
   }
 
 }
