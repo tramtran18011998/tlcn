@@ -1,6 +1,7 @@
 package com.example.furniturewebdemo1.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "product")
 @JsonIgnoreProperties({"invoiceproduct_products","products"})
@@ -50,7 +52,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("product")
-    private Collection<ProductImage> productImages;
+    private Set<ProductImage> productImages;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

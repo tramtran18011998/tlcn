@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit {
   }
 
   getCateByType(id: number){
-    this.categories=this.categoryService.getAllByCategoryType(id);
+    this.categories=this.categoryService.getByType(id);
     //localStorage.setItem('a', JSON.stringify(this.categories));
     
     // console.log(this.categories);

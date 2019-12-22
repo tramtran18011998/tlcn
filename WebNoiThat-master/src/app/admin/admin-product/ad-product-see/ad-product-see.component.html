@@ -5,45 +5,91 @@
         <h2>Thông tin chi tiết sản phẩm: Bàn</h2>
     </div>
     <div class="row">
-        <div class="col-12 mb-3">
-            <span class="label">Ảnh</span> <br>
-            <div class="row">
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
-                <div class="col-2"><img src="assets/image/product.jpg" alt="" width="100%"></div>
+        <div class="col-12 mb-3" >
+            
+            <div id="carouselExample" class="carouselPrograms carousel slide"  data-ride="carousel" data-interval="false">
+                <div class="carousel-inner row w-100 mx-auto" role="listbox" >
+                    <div class="carousel-item col-md-4  active" *ngFor="let productImg of productImgs; let i = index " >
+                       <div class="panel panel-default">
+                          <div class="panel-thumbnail" >
+                            <a href="#" title="image 1" class="thumb">
+                              <img style="height: 250px;width: 250px !important; margin: 0;padding: 0;" 
+                              class="img-fluid mx-auto d-block" src="http://localhost:8080/api/productimage/{{productImg.name}}" alt="slide {{i}}">
+                            </a>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
+
+            
+        
+
         </div>
         <div class="col-12">
             <table class="table table-striped">
                 <tr>
                     <td>ID Sản phẩm:</td>
-                    <td>01</td>
+                    <td>{{product.id}}</td>
                 </tr>
                 <tr>
                     <td>Tên Sản phẩm:</td>
-                    <td>Bàn</td>
+                    <td>{{product.name}}</td>
+                </tr>
+                <tr>
+                    <td>Màu sắc:</td>
+                    <td>{{product.color}}</td>
                 </tr>
                 <tr>
                     <td>Giá:</td>
-                    <td>450.000đ</td>
+                    <td>{{product.price}}</td>
                 </tr>
                 <tr>
-                    <td>Phần Trăm Khuyến Mãi:</td>
-                    <td>0</td>
+                    <td>Giá giảm: </td>
+                    <td>{{product.discountPrice}}</td>
                 </tr>
                 <tr>
-                    <td>Ngày Thêm</td>
-                    <td>06/11/2018</td>
+                    <td>Chất liệu : </td>
+                    <td>{{product.material}}</td>
                 </tr>
+                <tr>
+                    <td>Kích thước :</td>
+                    <td>{{product.size}}</td>
+                </tr>
+                <tr>
+                    <td>Mô tả : </td>
+                    <td>{{product.description}}</td>
+                </tr>
+                <tr>
+                    <td>Số lượng :</td>
+                    <td>{{product.quantity}}</td>
+                </tr>
+                <tr>
+                    <td>Loại sản phẩm :</td>
+                    <td>{{product.category}}</td>
+                </tr>
+                <tr>
+                    <td>Nhà cung cấp :</td>
+                    <td>{{product.supplier}}</td>
+                </tr>
+
             </table>
         </div>
     </div>
     <div class="row justify-content-center mt-3 mb-4">
-        <a href="#" class="btn btn-primary btn-rounded" style="color: white;">Sửa
+        <a routerLink="/admin/adproduct" class="btn btn-primary btn-rounded" style="color: white;">Sửa
             sản phẩm</a> &nbsp; &nbsp;
-        <a routerLink="adproduct" class="btn btn-primary btn-rounded" style="color: white;">Về trang quản lý sản phẩm</a>
+        <a routerLink="/admin/adproduct" class="btn btn-success btn-rounded" style="margin-left: 16px;color: white;">Về
+            trang quản lí</a>
     </div>
 </div>

@@ -3,7 +3,6 @@ package com.example.furniturewebdemo1.controller;
 import com.example.furniturewebdemo1.exception.ResourceNotFoundException;
 import com.example.furniturewebdemo1.model.Product;
 import com.example.furniturewebdemo1.model.ProductImage;
-import com.example.furniturewebdemo1.model.User;
 import com.example.furniturewebdemo1.repository.ProductImageRepositpry;
 import com.example.furniturewebdemo1.repository.ProductRepository;
 import com.example.furniturewebdemo1.service.ProductService;
@@ -22,6 +21,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +34,7 @@ public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
+
 
     @Autowired
     private ProductImageRepositpry productImageRepositpry;
@@ -179,6 +180,22 @@ public class ProductController {
 
         return (ResponseEntity<?>) ResponseEntity.ok();
     }
+
+    @PostMapping(value = "/productimgA/{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<ProductImage> createProductImg(@RequestParam("file") MultipartFile file,@PathVariable(value = "id") long id) throws IOException, ResourceNotFoundException {
+
+        //ProductImage productImage = new ProductImage();
+        Product product = productService.findProductById(id).orElseThrow(()-> new ResourceNotFoundException("Product not found"));
+        logger.info(product.getName());
+        //productImage.setProduct(product);
+        ProductImage productImage = new ProductImage();
+        productImage.setProduct(product);
+        productImage.setName(productService.storeImgA(file, id));
+        productImageRepositpry.save(productImage);
+        //productImageRepositpry.save(product);
+
+        return new ResponseEntity<>(productImage, HttpStatus.CREATED);
+    }
     //fix error 406: [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
     @ResponseBody
     @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
@@ -186,8 +203,20 @@ public class ProductController {
         return "acceptable MIME type:" + MediaType.APPLICATION_JSON_VALUE;
     }
 
-    @GetMapping("/productimg/{product_id}")
-    public List<ProductImage> getProductByProductId(@PathVariable(value = "product_id") long product_id) throws ResourceNotFoundException {
-        return productRepository.listProductImageByProductId(product_id);
+    @GetMapping("/productimglist/{product_id}")
+    public List<ProductImage> getProductByProductId(@PathVariable(value = "product_id") long product_id){
+        return productImageRepositpry.listProductImageByProductId(product_id);
     }
+
+    //serve image
+    @RequestMapping(value = "productimage/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
+    @ResponseBody
+    public  byte[] getImageProducts(@PathVariable(value = "imageName") String imageName) throws IOException {
+
+        File serverFile = new File("uploads/products/" + imageName);
+
+        return Files.readAllBytes(serverFile.toPath());
+    }
+
+
 }

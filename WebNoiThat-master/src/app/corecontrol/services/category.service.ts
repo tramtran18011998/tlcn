@@ -11,6 +11,8 @@ import { Category } from '../models/category';
 export class CategoryService {
 
   private baseUrl = 'http://localhost:8080/api/category';
+  private url = 'http://localhost:8080/api/category/list';
+  
 
   private category: Category[]=[];
   private _refresh = new Subject<void>();
@@ -27,15 +29,24 @@ export class CategoryService {
     return this._refresh;
   }
   getList(): Observable<any>{
-    return this.http.get(`${this.baseUrl}`, this.options);
+    return this.http.get(`${this.baseUrl}`, this.options).pipe(
+      tap(()=> {
+        this._refresh.next();
+      })
+    );
   }
   
-  getCategoryTypeById(id: number): Observable<any> {
+  getById(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`, this.options);
   }
 
-  getAllByCategoryType(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl+"/list"}/${id}`);
+
+  getByType(id: number): Observable<any> {
+    return this.http.get(`${this.url}/${id}`, this.options).pipe(
+      tap(()=> {
+        this._refresh.next();
+      })
+    );
   }
 
   createNew(ob: Object): Observable<Object> {

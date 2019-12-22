@@ -60,4 +60,21 @@ public class ProductServiceImpl implements ProductService {
         return file.getOriginalFilename();
     }
 
+    @Override
+    public String storeImgA(MultipartFile file, long id) throws IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        File convertFile = new File("uploads/products/"+fileName);
+        convertFile.createNewFile();
+
+        try (FileOutputStream fout = new FileOutputStream(convertFile))
+        {
+            fout.write(file.getBytes());
+        }
+        catch (Exception exe)
+        {
+            exe.printStackTrace();
+        }
+        return file.getOriginalFilename();
+    }
+
 }

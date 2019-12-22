@@ -48,6 +48,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSliderModule} from '@angular/material/slider';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+
 import { ProfileComponent } from './profile/profile.component';
 import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
 import { AdCategoryAddComponent } from './admin/admin-category/ad-category-add/ad-category-add.component';
@@ -111,7 +113,8 @@ import { AdCategoryEditComponent } from './admin/admin-category/ad-category-edit
     MatSelectModule,
     MatSortModule,
     MatFormFieldModule, 
-    MatInputModule
+    MatInputModule,
+    MatCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,6 +10,9 @@ export class ProductService {
 
   private baseUrl = 'http://localhost:8080/api/product';
   private urlImg = 'http://localhost:8080/api/productimg';
+  private urlImgList = 'http://localhost:8080/api/productimglist';
+  private urlImg2 = 'http://localhost:8080/api/productimgA';
+
 
   private _refresh = new Subject<void>();
   private headers= new HttpHeaders({
@@ -40,11 +43,11 @@ export class ProductService {
   }
 
   getProductImgByProductId(id: number): Observable<any> {
-    return this.http.get(`${this.urlImg}/${id}`, this.options);
+    return this.http.get(`${this.urlImgList}/${id}`, this.options);
   }
 
   
-  createNew(ob: Object): Observable<Object> {
+  createNew(ob: any): Observable<any> {
     return this.http.post(`${this.baseUrl}`, ob, this.options).pipe(
       tap(()=> {
         this._refresh.next();
@@ -54,6 +57,14 @@ export class ProductService {
 
   createProductImg(id: number,ob: FormData): Observable<Object> {
     return this.http.post(`${this.urlImg}/${id}`, ob, this.optionsImg).pipe(
+      tap(()=> {
+        this._refresh.next();
+      })
+    );
+  }
+
+  createProductImg2(id: number,ob: FormData): Observable<Object> {
+    return this.http.post(`${this.urlImg2}/${id}`, ob, this.optionsImg).pipe(
       tap(()=> {
         this._refresh.next();
       })

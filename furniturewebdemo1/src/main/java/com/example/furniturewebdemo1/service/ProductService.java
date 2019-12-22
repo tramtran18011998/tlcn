@@ -14,4 +14,5 @@ public interface ProductService {
     void delete (Product product);
 
     String storeImg(MultipartFile file) throws IOException;
+    String storeImgA(MultipartFile file, long id) throws IOException;
 }

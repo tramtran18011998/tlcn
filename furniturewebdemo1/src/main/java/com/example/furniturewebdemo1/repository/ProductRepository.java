@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
-    //get list employee: role: ROLE_EMPLOYEE
-    @Query(value = "select *from product_image as pi where pi.product_id=:product_id",nativeQuery = true)
-    List<ProductImage> listProductImageByProductId(@Param("product_id") long product_id);
+//    @Query(value = "select *from product_image as pi where pi.product_id=:product_id",nativeQuery = true)
+//    List<ProductImage> listProductImageByProductId(@Param("product_id") long product_id);
 }
