@@ -62,7 +62,7 @@ public class AuthController {
     private TokenProvider tokenProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws ResourceNotFoundException {
+    public String authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws ResourceNotFoundException {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -84,7 +84,7 @@ public class AuthController {
         AuthResponse authResponse = new AuthResponse(token,"Bearer",user);
 //        return ResponseEntity.ok(new AuthResponse(token, userRepository.findByEmail(loginRequest.getEmail())));
 //        return ResponseEntity.ok(userRepository.findByEmail(loginRequest.getEmail()));
-        return ResponseEntity.ok(authResponse);
+        return token;
     }
 
 

@@ -40,14 +40,16 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.loginRequest).subscribe(
       (data) => {
         console.log(data);
-        //this.authResponse = data;
         localStorage.setItem('token',JSON.stringify(data) );
-        //localStorage.setItem('currentUser', JSON.stringify(data));
-        // this.checkUser = JSON.parse(localStorage.getItem('currentUser'));
-        // console.log("luu user from localStorage" + this.checkUser);
+        this.authResponse.accessToken=JSON.parse(localStorage.getItem('token'));
+        
+        
         this.userService.getUserByEmail(this.loginRequest.email).subscribe(data => {
           console.log("user: ",data);
           this.user = data;
+          this.authResponse.user = this.user;
+          localStorage.setItem('auth',JSON.stringify(this.authResponse) );
+          localStorage.setItem('currentuser',JSON.stringify(this.user) );
         })
       },
       error => {

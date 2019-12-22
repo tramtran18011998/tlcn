@@ -26,7 +26,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login( credentials: LoginRequest){    
-    return this.http.post(`${this.baseUrl}`+"/login",credentials,this.options);
+    return this.http.post(`${this.baseUrl}`+"/login",credentials,{ responseType: 'text' });
   }
 
   check(email: string): Observable<any> {
