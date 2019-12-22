@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-ad-product-see',
   templateUrl: './ad-product-see.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdProductSeeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private acroute: ActivatedRoute) { }
 
   ngOnInit() {
   }

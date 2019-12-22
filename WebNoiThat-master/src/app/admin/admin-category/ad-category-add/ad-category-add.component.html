@@ -1,0 +1,37 @@
+<app-adsidebar></app-adsidebar>
+<app-adnavbar></app-adnavbar>
+<div class="card" style="margin: 16px 0;">
+    <div class="card-body">
+        <h3 class="card-title">Thêm loại sản phẩm</h3>
+        <form [formGroup]="addForm" (ngSubmit)="onSubmitCreate(addForm)">
+            <div class="form-form_row">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-group">
+                        <label for="">Tên loại sản phẩm</label>
+                        <input type="text" class="form-control" formControlName="name" id="name"
+                            name="name" rows="3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form_row">
+
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label>Loại phòng :</label>
+                    <div class="form-group">
+                        <div formArrayName="categoryTypesF" style="margin: auto 30px;"
+                            *ngFor="let categoryTypeF of addForm.controls.categoryTypesF.controls; let i = index">
+                            <input type="checkbox"  class="form-check-input"
+                                [formControlName]="i">
+                            <label>{{categoryTypes[i].name}}</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <a routerLink="/admin/adcategory" class="btn btn-primary btn-rounded" style="color: white;"> Quay về</a>
+            <input type="submit" class="btn btn-success btn-rounded" style="margin-left: 5px;" value="Lưu" />
+        </form>
+    </div>
+</div>

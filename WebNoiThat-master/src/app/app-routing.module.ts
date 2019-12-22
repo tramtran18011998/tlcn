@@ -30,6 +30,9 @@ import { AdWorkerSeeComponent } from './admin/admin-worker/ad-worker-see/ad-work
 import { AdWorkerEditComponent } from './admin/admin-worker/ad-worker-edit/ad-worker-edit.component';
 import { AdWorkerAddComponent } from './admin/admin-worker/ad-worker-add/ad-worker-add.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
+import { AdCategoryEditComponent } from './admin/admin-category/ad-category-edit/ad-category-edit.component';
+import { AdCategoryAddComponent } from './admin/admin-category/ad-category-add/ad-category-add.component';
 
 
 const routes: Routes = [
@@ -52,6 +55,10 @@ const routes: Routes = [
       { path: 'adproduct/detail/:id', component: AdProductSeeComponent },
       { path: 'adproduct/edit/:id', component: AdProductEditComponent },
       { path: 'adproduct/add', component: AdProductAddComponent },
+
+      { path: 'adcategory', component: AdminCategoryComponent },
+      { path: 'adcategory/edit/:id', component: AdCategoryEditComponent },
+      { path: 'adcategory/add', component: AdCategoryAddComponent },
 
       { path: 'addetail', component: AdminAccessoriesComponent },
       { path: 'addetail/detail/:id', component: AdAccessoriesSeeComponent },

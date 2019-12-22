@@ -49,6 +49,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSliderModule} from '@angular/material/slider';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
+import { AdCategoryAddComponent } from './admin/admin-category/ad-category-add/ad-category-add.component';
+import { AdCategoryEditComponent } from './admin/admin-category/ad-category-edit/ad-category-edit.component';
 
 
 @NgModule({
@@ -88,6 +91,9 @@ import { ProfileComponent } from './profile/profile.component';
     AdWorkerEditComponent,
     AdWorkerSeeComponent,
     ProfileComponent,
+    AdminCategoryComponent,
+    AdCategoryAddComponent,
+    AdCategoryEditComponent,
    
     
   ],

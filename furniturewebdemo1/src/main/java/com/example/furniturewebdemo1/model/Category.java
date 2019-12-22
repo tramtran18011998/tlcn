@@ -30,10 +30,12 @@ public class Category implements Serializable {
     @JsonIgnoreProperties("category")
     private Collection<Product> products;
 
+//    @ManyToMany( cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(name = "category_categorytype", joinColumns = @JoinColumn(name = "category_id"), inverseJoinColumns = @JoinColumn(name = "categorytype_id"))
     @JsonIgnoreProperties("categories")
     private Set<CategoryType> categoryTypes;
+
 }
 
 

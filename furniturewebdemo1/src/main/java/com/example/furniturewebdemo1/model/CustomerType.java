@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -23,7 +24,8 @@ public class CustomerType {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "customerType",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customerType", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("customerType")
-    private Collection<Customer> customers;
+    private Set<Customer> customers;
+
 }

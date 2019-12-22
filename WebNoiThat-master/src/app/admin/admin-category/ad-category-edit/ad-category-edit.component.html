@@ -1,0 +1,43 @@
+<app-adsidebar></app-adsidebar>
+<app-adnavbar></app-adnavbar>
+<div class="card" style="margin: 16px 0;">
+    <div class="card-body">
+        <h3 class="card-title">Sửa Nhà cung cấp</h3>
+        <form class="forms-sample"  (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="ten-phu-kien">Tên Nhà Cung Cấp (bắt buộc)</label>
+                    <input type="text" class="form-control" required [(ngModel)]="supplier.name" name="name" placeholder="Tên nhà cung cấp" >
+                    <small class="text-danger" id="validate-ten-khach-hang"></small>
+
+
+                </div>
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="ten-phu-kien">Email (bắt buộc)</label>
+                    <input type="text" class="form-control" required [(ngModel)]="supplier.email" name="email" placeholder="Email" >
+                    <small class="text-danger" id="validate-email-khach-hang"></small>
+
+
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 col-sm-12 form-group">
+                    <label for="ten-phu-kien">Số điện thoại</label>
+                    <input type="text" class="form-control" required [(ngModel)]="supplier.phoneNumber" name="phoneNumber" placeholder="Số điện thoại">
+                    <small class="text-danger" id="validate-so-dien-thoai"></small>
+
+
+                </div>
+                <div class="form-group col-md-6 col-sm-12">
+                    <label for="">Địa chỉ</label>
+                    <input type="text" class="form-control" required [(ngModel)]="supplier.address" name="address" rows="3" placeholder="Địa chỉ">
+
+                </div>
+            </div>
+            
+            <a routerLink="/admin/adsupplier" class="btn btn-primary btn-rounded" style="color: white;"> Về Trang
+                Quản Lý Nhà Cung Cấp</a>
+            <input type="submit" class="btn btn-success btn-rounded" style="margin-left: 5px;"  value="Lưu" />
+        </form>
+    </div>
+</div>

@@ -26,8 +26,10 @@ public class CategoryType implements Serializable {
     @Column(name = "name")
     private String name;
 
+
     @ManyToMany(mappedBy = "categoryTypes",fetch = FetchType.EAGER)
     @JsonIgnoreProperties("categoryTypes")
     private Set<Category> categories;
+
 }
 

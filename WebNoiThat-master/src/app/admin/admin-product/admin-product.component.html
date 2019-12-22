@@ -3,146 +3,75 @@
 <div class="card">
     <div class="card-body">
         <h2 class="card-title">Quản Lý Sản Phẩm</h2>
+        
         <div class="row">
             <div class="col-sm-12 col-md-6">
-                <a class="nav-link" routerLink="/admin/adproduct/add" class="nav-link" class="btn btn-primary btn-rounded">Thêm sản phẩm</a>
+                <a routerLink="/admin/adproduct/add" style="color: aliceblue;" class="btn btn-primary btn-rounded">Thêm Sản phẩm</a>
             </div>
-            <div class="col-sm-12 col-md-6">
-                <input type="search" class="form-control search" placeholder="Search" aria-controls="order-listing">
+            <div  class="col-sm-12 col-md-6">
+                <mat-form-field>
+                    <input matInput  (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiếm">
+                </mat-form-field>
+        
             </div>
+           
         </div>
-        <table class="table table-hover results" style="margin: 16px 0;">
-            <thead>
-                <tr>
-                    <th>Tên</th>
+      
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
 
-                    <th>Giá</th>
-                    <th>Số lượng</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Bàn</td>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mã </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
 
-                    <td>100000</td>
-                    <td>1</td>
-                    <td>
-                        <a class="nav-link" routerLink="/admin/adproduct/detail" class="nav-link">Xem</a> |
-                        <a class="nav-link" routerLink="/admin/adproduct/edit" class="nav-link">Sửa</a> |
-                        <a href="#">Xóa</a>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="color">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Màu sắc </th>
+                    <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Giá </th>
+                    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="discountPrice">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Giá giảm </th>
+                    <td mat-cell *matCellDef="let element"> {{element.discountPrice}} </td>
+                </ng-container>
+                <ng-container matColumnDef="material">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Chất liệu </th>
+                    <td mat-cell *matCellDef="let element"> {{element.material}} </td>
+                </ng-container>
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Số lượng </th>
+                    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                </ng-container>
+                <ng-container matColumnDef="size">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Kích thước </th>
+                    <td mat-cell *matCellDef="let element"> {{element.size}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="choose">
+                    <th mat-header-cell *matHeaderCellDef > Lựa chọn </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button (click)="detail(element.id)" style="height: 28px; width: 27px;padding: initial; margin-right: 5px;" class="btn btn-success"  routerLink="/admin/adproduct/detail"><i class="fa fa-info"></i></button>
+                        <button (click)="edit(element.id)" style="height: 28px; width: 27px;padding: initial; margin-right: 5px;" class="btn btn-primary" routerLink="/admin/adproduct/edit"><i class="fa fa-edit"></i></button>
+                        <button (click)="delete(element.id)" style="height: 28px; width: 27px;padding: initial; margin-right: 5px;" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        
                     </td>
-                </tr>
-                <tr>
-                    <td>Bàn</td>
+                </ng-container>
 
-                    <td>100000</td>
-                    <td>1</td>
-                    <td>
-                        <a routerLink="see-adproduct">Xem</a> |
-                        <a routerLink="edit-adproduct">Sửa</a> |
-                        <a href="#">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bàn</td>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
 
-                    <td>100000</td>
-                    <td>1</td>
-                    <td>
-                        <a routerLink="see-adproduct">Xem</a> |
-                        <a routerLink="edit-adproduct">Sửa</a> |
-                        <a href="#">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bàn</td>
-
-                    <td>100000</td>
-                    <td>1</td>
-                    <td>
-                        <a routerLink="see-adproduct">Xem</a> |
-                        <a routerLink="edit-adproduct">Sửa</a> |
-                        <a href="#">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bàn</td>
-
-                    <td>100000</td>
-                    <td>1</td>
-                    <td>
-                        <a routerLink="see-adproduct">Xem</a> |
-                        <a routerLink="edit-adproduct">Sửa</a> |
-                        <a href="#">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bàn</td>
-
-                    <td>100000</td>
-                    <td>1</td>
-                    <td>
-                        <a routerLink="see-adproduct">Xem</a> |
-                        <a routerLink="edit-adproduct">Sửa</a> |
-                        <a href="#">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bàn</td>
-
-                    <td>100000</td>
-                    <td>1</td>
-                    <td>
-                        <a routerLink="see-adproduct">Xem</a> |
-                        <a routerLink="edit-adproduct">Sửa</a> |
-                        <a href="#">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bàn</td>
-
-                    <td>100000</td>
-                    <td>1</td>
-                    <td>
-                        <a routerLink="see-adproduct">Xem</a> |
-                        <a routerLink="edit-adproduct">Sửa</a> |
-                        <a href="#">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bàn</td>
-
-                    <td>100000</td>
-                    <td>1</td>
-                    <td>
-                        <a routerLink="see-adproduct">Xem</a> |
-                        <a routerLink="edit-adproduct">Sửa</a> |
-                        <a href="#">Xóa</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
         </div>
     </div>
 </div>
