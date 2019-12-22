@@ -54,6 +54,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
 import { AdCategoryAddComponent } from './admin/admin-category/ad-category-add/ad-category-add.component';
 import { AdCategoryEditComponent } from './admin/admin-category/ad-category-edit/ad-category-edit.component';
+import { AdminReceiptComponent } from './admin/admin-receipt/admin-receipt.component';
+import { AdReceiptSeeComponent } from './admin/admin-receipt/ad-receipt-see/ad-receipt-see.component';
+
 
 
 @NgModule({
@@ -96,6 +99,8 @@ import { AdCategoryEditComponent } from './admin/admin-category/ad-category-edit
     AdminCategoryComponent,
     AdCategoryAddComponent,
     AdCategoryEditComponent,
+    AdminReceiptComponent,
+    AdReceiptSeeComponent,
    
     
   ],

@@ -6,6 +6,7 @@ import com.example.furniturewebdemo1.exception.BadRequestException;
 import com.example.furniturewebdemo1.exception.ResourceNotFoundException;
 import com.example.furniturewebdemo1.model.*;
 import com.example.furniturewebdemo1.payload.ApiResponse;
+import com.example.furniturewebdemo1.payload.AuthResponse;
 import com.example.furniturewebdemo1.payload.LoginRequest;
 import com.example.furniturewebdemo1.payload.SignUpRequest;
 import com.example.furniturewebdemo1.repository.RoleRepository;
@@ -61,7 +62,7 @@ public class AuthController {
     private TokenProvider tokenProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws ResourceNotFoundException {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -78,20 +79,15 @@ public class AuthController {
 
         String role = userRepository.findByRoleUser(loginRequest.getEmail());
         logger.info("role: "+role);
+        User user = findUser(loginRequest.getEmail());
+        //logger.info("user: "+user);
+        AuthResponse authResponse = new AuthResponse(token,"Bearer",user);
 //        return ResponseEntity.ok(new AuthResponse(token, userRepository.findByEmail(loginRequest.getEmail())));
-        return ResponseEntity.ok(userRepository.findByEmail(loginRequest.getEmail()));
+//        return ResponseEntity.ok(userRepository.findByEmail(loginRequest.getEmail()));
+        return ResponseEntity.ok(authResponse);
     }
 
 
-//    @PostMapping(value = "/loginCheck",produces="application/json")
-//    public String checkUser(@Valid @RequestBody LoginRequest loginRequest) {
-//        //boolean check = false;
-//
-//        String role = userRepository.findByRoleUser(loginRequest.getEmail());
-//
-//        logger.info("roleUSER: "+role);
-//        return role;
-//    }
 
     @GetMapping(value = "/loginCheck/{email}",produces="application/json")
     public String checkUser(@PathVariable(value = "email") String email) {
@@ -101,6 +97,12 @@ public class AuthController {
 
         logger.info("roleUSER: "+role);
         return role;
+    }
+
+    @GetMapping(value = "/userfind/{email}",produces="application/json")
+    public User findUser(@PathVariable(value = "email") String email) throws ResourceNotFoundException {
+        User user =userRepository.findByEmail(email).orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
+        return user;
     }
 
 

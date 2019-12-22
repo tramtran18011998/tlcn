@@ -33,6 +33,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
 import { AdCategoryEditComponent } from './admin/admin-category/ad-category-edit/ad-category-edit.component';
 import { AdCategoryAddComponent } from './admin/admin-category/ad-category-add/ad-category-add.component';
+import { AdminReceiptComponent } from './admin/admin-receipt/admin-receipt.component';
+import { AdReceiptSeeComponent } from './admin/admin-receipt/ad-receipt-see/ad-receipt-see.component';
 
 
 const routes: Routes = [
@@ -79,6 +81,9 @@ const routes: Routes = [
       { path: 'adsupplier/detail/:id', component: AdSupplierSeeComponent },
       { path: 'adsupplier/edit/:id', component: AdSupplierEditComponent },
       { path: 'adsupplier/add', component: AdSupplierAddComponent },
+
+      { path: 'adreceipt', component: AdminReceiptComponent },
+      { path: 'adsupplier/detail/:id', component: AdReceiptSeeComponent },
 
     ]
   },

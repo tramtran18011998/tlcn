@@ -1,6 +1,7 @@
 package com.example.furniturewebdemo1.controller;
 
 import com.example.furniturewebdemo1.exception.AppException;
+import com.example.furniturewebdemo1.exception.BadRequestException;
 import com.example.furniturewebdemo1.exception.ResourceNotFoundException;
 
 import com.example.furniturewebdemo1.model.*;
@@ -64,6 +65,9 @@ public class EmployeeController {
     @PostMapping(value = "/employee", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<?> createEmployee(@Valid @ModelAttribute Employee employee, @Valid @ModelAttribute User user, @RequestParam("file") MultipartFile file) throws IOException {
 
+        if(userRepository.existsByEmail(user.getEmail())) {
+            throw new BadRequestException("Email address already in use.");
+        }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

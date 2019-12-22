@@ -1,3 +1,6 @@
+import { InvoiceProduct } from './invoiceproduct';
+import { InvoiceDetail } from './invoicedetail';
+
 export  class Receipt {
     id: number;
     amount: string;
@@ -7,8 +10,8 @@ export  class Receipt {
     statePaid: boolean;
     total: number;
     employee_id: number;
-    invoicedetail_id: number;
-    invoiceproduct_id: number;
+    invoiceDetail: InvoiceDetail;
+    invoiceProduct: InvoiceProduct;
 
     createdDate: Date;
     updatedDate: Date;
