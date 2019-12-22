@@ -85,7 +85,7 @@
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="">Loại sản phẩm :</label>
                     <select style="width: 210px;" class="form-control" name="category" formControlName="category" 
-                    id="category">
+                    #mySelectCate (change)='onOptionsSelectedCate(mySelectCate.value)' id="category">
                         <option *ngFor="let category of categories " [value]="category.id">
                             {{category.name}}
                         </option>
@@ -99,7 +99,8 @@
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="">Nhà cung cấp :</label>
             
-                    <select style="width: 210px;" class="form-control" name="supplier" formControlName="supplier" id="supplier">
+                    <select style="width: 210px;" class="form-control" name="supplier" formControlName="supplier"
+                    #mySelectSup (change)='onOptionsSelectedSup(mySelectSup.value)' id="supplier">
                         <option *ngFor="let supplier of suppliers " [value]="supplier.id">
                             {{supplier.name}}
                         </option>

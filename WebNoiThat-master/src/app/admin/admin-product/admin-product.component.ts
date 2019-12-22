@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/corecontrol/services/product.service';
 })
 export class AdminProductComponent implements OnInit {
 
-  displayedColumns: string[] = ['id','name', 'color', 'price','discountPrice','material','quantity','size','choose'];
+  displayedColumns: string[] = ['id','name', 'color', 'price','discountPrice','material','quantity','choose'];
   
   
 

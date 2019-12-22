@@ -21,7 +21,8 @@
                 
                             <div class="file btn btn-lg btn-primary" style="position: relative;overflow: hidden;">Upload
                                 <input style="position: absolute; font-size: 50px;opacity: 0;right: 0; top: 0;" type="file" name="file"
-                                    (change)="selectImage($event)" />
+                                    (change)="onSelectFile($event)" multiple/>
+                                    <!-- <input type='file' (change)="onSelectFile($event)" multiple> -->
                             </div>
                 
                         </div>
@@ -32,12 +33,12 @@
             <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
                     <label>Tên Sản phẩm</label>
-                    <input type="text" class="form-control" required [(ngModel)]="product.name" name="name" >
+                    <input type="text" class="form-control" required [(ngModel)]="product.name" name="name" id="name" >
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12">
                     <label >Giá thành:</label>
-                    <input type="number" class="form-control" required [(ngModel)]="product.price" name="price">
+                    <input type="number" class="form-control" required [(ngModel)]="product.price" name="price" id="price">
 
                 </div>
             </div>
@@ -47,12 +48,12 @@
             <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
                     <label>Màu sắc :</label>
-                    <input type="text" class="form-control" required [(ngModel)]="product.color" name="color" >
+                    <input type="text" class="form-control" required [(ngModel)]="product.color" name="color"  id="color">
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12">
                     <label >Giá khuyến mãi :</label>
-                    <input type="number" class="form-control" required [(ngModel)]="product.discountPrice" name="discountPrice">
+                    <input type="number" class="form-control" required [(ngModel)]="product.discountPrice"  id="discountPrice" name="discountPrice">
 
                 </div>
             </div>
@@ -60,12 +61,12 @@
             <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
                     <label>Mô tả :</label>
-                    <textarea type="text" class="form-control" required [(ngModel)]="product.description" name="description" ></textarea>
+                    <textarea type="text" class="form-control" required [(ngModel)]="product.description" name="description" id="description" ></textarea>
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12">
                     <label >Chất liệu :</label>
-                    <input type="text" class="form-control" required [(ngModel)]="product.material" name="material">
+                    <input type="text" class="form-control" required [(ngModel)]="product.material" name="material" id="material">
 
                 </div>
             </div>
@@ -73,21 +74,22 @@
             <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
                     <label>Số lượng :</label>
-                    <input type="number" class="form-control" required [(ngModel)]="product.quantity" name="quantity" >
+                    <input type="number" class="form-control" required [(ngModel)]="product.quantity" name="quantity" id="quantity">
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12">
                     <label >Kích thước :</label>
-                    <input type="text" class="form-control" required [(ngModel)]="product.size" name="size">
+                    <input type="text" class="form-control" required [(ngModel)]="product.size" name="size" id="size">
 
                 </div>
             </div>
-
-            <!-- <div class="form-row">
+       
+            
+            <div class="form-row">
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="">Loại sản phẩm :</label>
-                    <select style="width: 210px;" class="form-control" name="category" [(ngModel)]="product.category.id"
-                    id="category">
+                    <select style="width: 210px;" class="form-control" name="category" [(ngModel)]="category.id"
+                    #mySelect (change)='onOptionsSelectedCate(mySelect.value)' id="category">
                         <option *ngFor="let category of categories " [value]="category.id">
                             {{category.name}}
                         </option>
@@ -98,15 +100,15 @@
                 <div class="col-md-6 col-sm-12 form-group">
                     <label for="">Nhà cung cấp :</label>
             
-                    <select style="width: 210px;" class="form-control" name="supplier" [(ngModel)]="product.supplier.id" id="supplier">
-                        <option *ngFor="let supplier of suppliers " [value]="supplier.id">
+                    <select style="width: 210px;" class="form-control" name="supplier" [(ngModel)]="supplier.id"
+                    #mySelectType (change)='onOptionsSelected(mySelectType.value)' id="supplier">
+                        <option *ngFor="let supplier of suppliers "  [value]="supplier.id">
                             {{supplier.name}}
                         </option>
                     </select>
                 </div>
 
-            </div> -->
-            
+            </div> 
             <a routerLink="/admin/adproduct" class="btn btn-primary btn-rounded" style="color: white;"> Về Trang
                 Quản Lý Sản Phẩm</a>
             <input type="submit" class="btn btn-primary btn-rounded" style="margin-left: 5px;" id="btn-submit" value="Lưu" />

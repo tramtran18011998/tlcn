@@ -47,55 +47,55 @@
         <div class="col-12">
             <table class="table table-striped">
                 <tr>
-                    <td>ID Sản phẩm:</td>
+                    <td style="width: 30%;">ID Sản phẩm:</td>
                     <td>{{product.id}}</td>
                 </tr>
                 <tr>
-                    <td>Tên Sản phẩm:</td>
+                    <td style="width: 30%;">Tên Sản phẩm:</td>
                     <td>{{product.name}}</td>
                 </tr>
                 <tr>
-                    <td>Màu sắc:</td>
+                    <td style="width: 30%;">Màu sắc:</td>
                     <td>{{product.color}}</td>
                 </tr>
                 <tr>
-                    <td>Giá:</td>
+                    <td style="width: 30%;">Giá:</td>
                     <td>{{product.price}}</td>
                 </tr>
                 <tr>
-                    <td>Giá giảm: </td>
+                    <td style="width: 30%;">Giá giảm: </td>
                     <td>{{product.discountPrice}}</td>
                 </tr>
                 <tr>
-                    <td>Chất liệu : </td>
+                    <td style="width: 30%;"> Chất liệu : </td>
                     <td>{{product.material}}</td>
                 </tr>
                 <tr>
-                    <td>Kích thước :</td>
+                    <td style="width: 30%;">Kích thước :</td>
                     <td>{{product.size}}</td>
                 </tr>
                 <tr>
-                    <td>Mô tả : </td>
+                    <td style="width: 30%;">Mô tả : </td>
                     <td>{{product.description}}</td>
                 </tr>
                 <tr>
-                    <td>Số lượng :</td>
+                    <td style="width: 30%;">Số lượng :</td>
                     <td>{{product.quantity}}</td>
                 </tr>
                 <tr>
-                    <td>Loại sản phẩm :</td>
-                    <td>{{product.category}}</td>
+                    <td style="width: 30%;">Loại sản phẩm :</td>
+                    <td>{{product.category.name}}</td>
                 </tr>
                 <tr>
-                    <td>Nhà cung cấp :</td>
-                    <td>{{product.supplier}}</td>
+                    <td style="width: 30%;">Nhà cung cấp :</td>
+                    <td>{{product.supplier.name}}</td>
                 </tr>
 
             </table>
         </div>
     </div>
     <div class="row justify-content-center mt-3 mb-4">
-        <a routerLink="/admin/adproduct" class="btn btn-primary btn-rounded" style="color: white;">Sửa
+        <a routerLink="/admin/adproduct/edit/{{product.id}}" class="btn btn-primary btn-rounded" style="color: white;">Sửa
             sản phẩm</a> &nbsp; &nbsp;
         <a routerLink="/admin/adproduct" class="btn btn-success btn-rounded" style="margin-left: 16px;color: white;">Về
             trang quản lí</a>

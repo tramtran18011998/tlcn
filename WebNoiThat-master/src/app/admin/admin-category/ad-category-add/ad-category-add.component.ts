@@ -5,6 +5,7 @@ import { CategoryService } from 'src/app/corecontrol/services/category.service';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import Swal from 'sweetalert2'
 import { Category } from 'src/app/corecontrol/models/category';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class AdCategoryAddComponent implements OnInit {
 
   addForm: FormGroup;
 
-  constructor(private categoryTypeService: CategoryTypeService, private categoryService: CategoryService,private formBuilder: FormBuilder) { }
+  constructor(private router: Router,private categoryTypeService: CategoryTypeService, private categoryService: CategoryService,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     
@@ -117,12 +118,15 @@ export class AdCategoryAddComponent implements OnInit {
               );  
             })
             addForm.reset();
+            this.router.navigate(['/admin/adcategory']);
         }
       })
     }
     
+    
     console.log("k:",this.categoryTypesArray);
 
+    //
     //this.categoryTypeService.getByName()
     //const selectedCountries = this.categoryTypes.filter( (categoryType) => categoryType.checked );
     // you could use an EventEmitter and emit the selected values here, or send them to another API with some service

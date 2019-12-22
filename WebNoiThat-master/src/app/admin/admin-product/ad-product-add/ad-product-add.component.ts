@@ -34,6 +34,8 @@ export class AdProductAddComponent implements OnInit {
   urls = [];
 
   cateTForm: FormGroup;
+  idCate: number;
+  idSub: number;
 
   constructor(private supplierService: SupplierService,private categoryTypeService: CategoryTypeService, private categoryService: CategoryService, private productService: ProductService, private router: Router, private formBuilder: FormBuilder) { }
 
@@ -56,14 +58,6 @@ export class AdProductAddComponent implements OnInit {
       category: new FormControl(''),
       supplier: new FormControl('')
     });
-
-    this.cateTForm = this.formBuilder.group([
-
-    ]);
-
-    this.imgForm = this.formBuilder.group([
-
-    ])
 
   }
   getSupplierList() {
@@ -91,6 +85,17 @@ export class AdProductAddComponent implements OnInit {
   onOptionsSelected(value: number) {
     console.log("the selected value is " + value);
     this.getCategoryListByType(value);
+  }
+
+  onOptionsSelectedCate(value: number) {
+    console.log("the selected value is " + value);
+    this.idCate= value;
+  }
+
+  onOptionsSelectedSup(value: number) {
+    console.log("the selected value is " + value);
+    this.getCategoryListByType(value);
+    this.idSub = value;
   }
 
 
@@ -131,11 +136,11 @@ export class AdProductAddComponent implements OnInit {
     console.log(this.productA.supplier);
     console.log(this.productA.category);
 
-    this.supplierService.getById(addForm.controls['supplier'].value).subscribe(data =>{
+    this.supplierService.getById(this.idSub).subscribe(data =>{
       this.supplier = data;
       this.productA.supplier = this.supplier;
 
-      this.categoryService.getById(addForm.controls['category'].value).subscribe(data => {
+      this.categoryService.getById(this.idCate).subscribe(data => {
         this.productA.category = data;
 
         this.productService.createNew(this.productA).subscribe(data => {
@@ -154,17 +159,20 @@ export class AdProductAddComponent implements OnInit {
                 console.log(data);
               })
             }
+            Swal.fire(
+              'Đã thêm!',
+              'Dữ liệu đã được thêm thành công.',
+              'success'
+            );  
             
           }
-          
+          this.router.navigate(['/admin/adproduct']);
         })
       });
 
     });
-
-    
-
-    
+    addForm.reset();
+ 
   }
 
 }
