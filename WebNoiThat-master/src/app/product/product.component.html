@@ -1,3 +1,94 @@
+<!-- <app-header></app-header>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
+    </ol>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-12">
+            <h3>Danh mục</h3>
+            <div class="list-group">
+                <div *ngFor="let categoryType of categoryTypes">
+                    <div class="dropdown-container">
+                        <a class="list-group-item list-group-item-action"
+                            (click)="loadProductByType(categoryType.id)">{{categoryType.name}}
+
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+            <h3 class="line">Giá</h3>
+            <div class="note-price">
+                <p>Chọn khoảng giá</p>
+            </div>
+            <div class="price-value">
+                <input type="text">
+                <span>-</span>
+                <input type="text">
+            </div>
+            <button type="button" class="btn btn-outline-primary">OK</button>
+            <div class="line"></div>
+        </div>
+        <div class="col-md-9 col-12">
+            <h3>Sản phẩm</h3>
+            <div class="alert alert-secondary" role="alert">
+                <div class="row">
+                    <div class="col-6">
+                        <select style="width: 210px;" class="form-control" name="item"  #mySelectType
+                            (change)='onOptionsSelected(mySelectType.value)' id="item">
+                            <option *ngFor="let item of items " [value]="item.id">
+                                {{item.name}}
+                            </option>
+                        </select>
+                       
+                    </div>
+                    <div class="col-4 seach-product">
+                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search">
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-dark my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" >
+                <div class="col-md-4 col-sm-6 col-12" *ngFor="let product of products; let i = index">
+                    <div class="product-img">
+                        <a routerLink="/product"(click)="detail(product.id)">
+                            <img style="width: 200px;height: 200px; margin: 0;padding: 0; margin-bottom: 10px;width: 100%;"  
+                            src="http://localhost:8080/api/productimage/{{imgname[i]}}"></a>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="row">
+                            <div class="col-6 product-name">
+                                <p>{{product.name}}</p>
+                            </div>
+                            <div class="col-6 product-price">
+                                <strong>{{product.discountPrice}}</strong>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+           
+            <mat-paginator [length]="totalProduct" [pageSize]="productsPerPage" 
+                    (page)="onChangedPage($event)">
+                </mat-paginator>
+            
+ 
+        </div>
+
+    </div>
+</div>
+<app-footer></app-footer> -->
+
 <app-header></app-header>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -58,9 +149,9 @@
             <div class="row" >
                 <div class="col-md-4 col-sm-6 col-12" *ngFor="let product of products; let i = index">
                     <div class="product-img">
-                        <a routerLink="/product/{{product.id}}">
+                        <a routerLink="/productdetail"(click)="detail(product.id)">
                             <img style="width: 200px;height: 200px; margin: 0;padding: 0; margin-bottom: 10px;width: 100%;"  
-                            src="http://localhost:8080/api/productimage/{{imgname[i]}}"></a>
+                            src="http://localhost:8080/api/productimage/{{imgPush[i]}}"></a>
                         
                     </div>
                     <div class="product-info">
@@ -82,22 +173,7 @@
                     (page)="onChangedPage($event)">
                 </mat-paginator>
             
-            
-            <!-- <nav aria-label="...">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trang trước</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item " aria-current="page">
-                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Trang sau</a>
-                    </li>
-                </ul>
-            </nav> -->
+ 
         </div>
 
     </div>
