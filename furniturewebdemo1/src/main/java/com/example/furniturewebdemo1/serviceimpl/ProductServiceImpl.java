@@ -4,6 +4,10 @@ import com.example.furniturewebdemo1.model.Product;
 import com.example.furniturewebdemo1.repository.ProductRepository;
 import com.example.furniturewebdemo1.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -75,6 +79,31 @@ public class ProductServiceImpl implements ProductService {
             exe.printStackTrace();
         }
         return file.getOriginalFilename();
+    }
+
+    @Override
+    public Page<Product> findAllByPriceAsc(Pageable pageable, int pageNum) {
+        pageable= PageRequest.of(pageNum,6, Sort.by("discountPrice").ascending());
+        Page<Product> page = productRepository.findAll(pageable);
+        return page;
+    }
+
+    @Override
+    public Page<Product> findAllByPriceDesc(Pageable pageable, int pageNum) {
+        pageable= PageRequest.of(pageNum,6, Sort.by("discountPrice").descending());
+        Page<Product> page = productRepository.findAll(pageable);
+        //page.c
+        //page.map(a -> a)
+        //page.map(this::findAllProduct)
+
+        return page;
+    }
+
+    @Override
+    public Page<Product> findAll(Pageable pageable, int pageNum) {
+        pageable= PageRequest.of(pageNum,6);
+        Page<Product> page = productRepository.findAll(pageable);
+        return page;
     }
 
 }

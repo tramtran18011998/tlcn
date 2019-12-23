@@ -16,6 +16,11 @@ export class ProductService {
   private urlByType = 'http://localhost:8080/api/producttype';
 
   private urlImgListLimit = 'http://localhost:8080/api/productimglistlimit';
+  private urltotal = 'http://localhost:8080/api/producttotal';
+  private urlPageAsc = 'http://localhost:8080/api/products/pageasc';
+  private urlPageDesc = 'http://localhost:8080/api/products/pagedesc';
+  private urlPage = 'http://localhost:8080/api/products/page';
+
 
 
   private _refresh = new Subject<void>();
@@ -38,10 +43,30 @@ export class ProductService {
   get refresh(){
     return this._refresh;
   }
+
+  total(): Observable<any>{
+    return this.http.get(`${this.urltotal}`, this.options);
+  }
+
   getList(): Observable<any>{
     return this.http.get(`${this.baseUrl}`, this.options);
   }
   
+
+  getListPageAsc(pagenum: number): Observable<any>{
+    return this.http.get(`${this.urlPageAsc}/${pagenum}`, this.options);
+  }
+
+  getListPageDesc(pagenum: number): Observable<any>{
+    return this.http.get(`${this.urlPageDesc}/${pagenum}`, this.options);
+  }
+
+  getListPage(pagenum: number): Observable<any>{
+    return this.http.get(`${this.urlPage}/${pagenum}`, this.options);
+  }
+
+
+
   getById(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`, this.options);
   }

@@ -20,4 +20,15 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
             "inner join categorytype as ct on cc.categorytype_id = ct.categorytype_id\n" +
             "where ct.categorytype_id =:categorytype_id",nativeQuery = true)
     List<Product> listProductCategoryType(@Param("categorytype_id") long categorytype_id);
+
+    @Query(value = "SELECT COUNT(product_id) FROM product",nativeQuery = true)
+    long total();
+
+    @Query(value = "SELECT * FROM product\n" +
+            "ORDER BY discount_price desc",nativeQuery = true)
+    List<Product> sortpricedesc();
+
+    @Query(value = "SELECT * FROM product\n" +
+            "ORDER BY discount_price asc",nativeQuery = true)
+    List<Product> sortpriceasc();
 }

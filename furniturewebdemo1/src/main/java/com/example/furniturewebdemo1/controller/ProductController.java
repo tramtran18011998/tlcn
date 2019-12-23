@@ -9,6 +9,8 @@ import com.example.furniturewebdemo1.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -228,6 +230,30 @@ public class ProductController {
         List<Product> products=productRepository.listProductCategoryType(id);
         return products;
     }
+
+    //total
+    @GetMapping("/producttotal")
+    public long total(){
+        return productRepository.total();
+    }
+
+    //list product paging
+    @GetMapping("/products/pageasc/{pageNum}")
+    public Page<Product> findAllByPriceAsc(Pageable page, @PathVariable("pageNum") int pageNum){
+        return productService.findAllByPriceAsc(page, pageNum);
+    }
+
+    //list product paging
+    @GetMapping("/products/pagedesc/{pageNum}")
+    public Page<Product> findAllByPriceDesc(Pageable page, @PathVariable("pageNum") int pageNum){
+        return productService.findAllByPriceDesc(page, pageNum);
+    }
+    //list product paging
+    @GetMapping("/products/page/{pageNum}")
+    public Page<Product> findAllPage(Pageable page, @PathVariable("pageNum") int pageNum){
+        return productService.findAll(page, pageNum);
+    }
+
 
 
 }

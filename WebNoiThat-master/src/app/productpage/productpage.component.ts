@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '../corecontrol/services/product.service';
 
 @Component({
   selector: 'app-productpage',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductpageComponent implements OnInit {
 
-  constructor() { }
+  id: number;
+
+  constructor(private acroute: ActivatedRoute, private productService:ProductService) { }
 
   ngOnInit() {
+    this.id = this.acroute.snapshot.params['id'];
   }
 
 }
