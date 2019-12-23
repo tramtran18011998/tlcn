@@ -4,6 +4,9 @@ import {tap} from 'rxjs/operators'
 import { HttpClient ,HttpHeaders } from '@angular/common/http';
 import { Observable,Subject } from 'rxjs';
 import { LoginRequest } from '../payloads/login-request';
+import { SignupRequest } from '../payloads/signup-request';
+import { ApiResponse } from '../payloads/api-response';
+
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +39,9 @@ export class UserService {
 
   getUserByEmail(email: string): Observable<any> {
     return this.http.get(`${this.baseUrl+"/userfind"}/${email}`, this.options);
+  }
+  signup(credentials: SignupRequest){
+    return this.http.post(`${this.baseUrl}`+"/signup",credentials);
   }
 
 }

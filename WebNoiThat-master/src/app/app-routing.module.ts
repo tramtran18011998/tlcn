@@ -47,7 +47,7 @@ const routes: Routes = [
   {path: 'cart', component: CartComponent},
   {path: 'product/:product-info', component: ProductpageComponent},
   {path: 'accessory/:product-info', component: ProductpageComponent},
-  {path: 'profile', component: ProfileComponent},
+  {path: 'profile/:id', component: ProfileComponent},
 
   //{path: 'admin', component: AdminComponent},
   {

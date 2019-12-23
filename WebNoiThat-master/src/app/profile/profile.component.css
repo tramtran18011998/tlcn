@@ -10,10 +10,11 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 .form-wrap {
-  width: 800px;
+  width: 50%;
   background: #ffd500;
   border-radius: 20px;
   margin: 50px auto;
+  padding: 30px;
 }
 .form-wrap *{transition: .1s linear}
 .profile {
@@ -24,10 +25,10 @@ body {
 }
 form {
   background: white;
-  float: left;
-  width: calc(100% - 240px);
+  /* float: left; */
+  /* width: calc(100% - 240px); */
   padding: 30px;
-  border-radius: 0 20px 20px 0;
+  border-radius: 20px 20px 20px 20px;
   color: #7b7b7b;
 }
 .form-wrap:after, form div:after {
@@ -45,7 +46,7 @@ h1 {
   position: relative;
   margin-top: 50px;
 }
-h1:after {
+/* h1:after {
   content: "\f138";
   font-size: 40px;
   font-family: FontAwesome;
@@ -53,7 +54,7 @@ h1:after {
   top: 50px;
   left: 50%;
   transform: translateX(-50%);
-}
+} */
 label, span {
   display: block;
   font-size: 14px;

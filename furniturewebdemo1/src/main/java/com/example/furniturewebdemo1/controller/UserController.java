@@ -58,6 +58,13 @@ public class UserController {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
+    @DeleteMapping("/api/user/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+        User user = userService.findByUserId(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        userService.delete(user);
+        return ResponseEntity.ok(user);
+    }
+
 
     //////////////////POST
 //    @PostMapping(value = "/api/user", produces = MediaType.IMAGE_PNG_VALUE)

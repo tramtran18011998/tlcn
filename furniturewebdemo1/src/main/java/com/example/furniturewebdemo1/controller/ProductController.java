@@ -208,6 +208,11 @@ public class ProductController {
         return productImageRepositpry.listProductImageByProductId(product_id);
     }
 
+    @GetMapping("/productimglistlimit/{product_id}")
+    public ProductImage getProductByProductIdLimit(@PathVariable(value = "product_id") long product_id){
+        return productImageRepositpry.getProductImageByProductIdLimit(product_id);
+    }
+
     //serve image
     @RequestMapping(value = "productimage/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
     @ResponseBody
@@ -216,6 +221,12 @@ public class ProductController {
         File serverFile = new File("uploads/products/" + imageName);
 
         return Files.readAllBytes(serverFile.toPath());
+    }
+
+    @GetMapping("/producttype/{id}")
+    public List<Product> getProductByType(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+        List<Product> products=productRepository.listProductCategoryType(id);
+        return products;
     }
 
 

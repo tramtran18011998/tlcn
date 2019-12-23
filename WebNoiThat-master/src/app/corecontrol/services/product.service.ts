@@ -13,6 +13,10 @@ export class ProductService {
   private urlImgList = 'http://localhost:8080/api/productimglist';
   private urlImg2 = 'http://localhost:8080/api/productimgA';
 
+  private urlByType = 'http://localhost:8080/api/producttype';
+
+  private urlImgListLimit = 'http://localhost:8080/api/productimglistlimit';
+
 
   private _refresh = new Subject<void>();
   private headers= new HttpHeaders({
@@ -44,6 +48,14 @@ export class ProductService {
 
   getProductImgByProductId(id: number): Observable<any> {
     return this.http.get(`${this.urlImgList}/${id}`, this.options);
+  }
+
+  getProductImgByProductIdLimit(id: number): Observable<any> {
+    return this.http.get(`${this.urlImgListLimit}/${id}`, this.options);
+  }
+
+  getByType(id: number): Observable<any> {
+    return this.http.get(`${this.urlByType}/${id}`, this.options);
   }
 
   

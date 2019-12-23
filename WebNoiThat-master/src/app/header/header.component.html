@@ -5,9 +5,13 @@
             <a  routerLink="/"><img src="assets/image/logo.png">Webnoithat</a>
         </div>
         <div class="form-inline col-sm-7 col-md-3">
-            <input class="form-control search-header" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control search-header" style="width: 70%;" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-dark my-2 my-sm-0 btn-search-header" type="submit"><i class="fa fa-search"></i></button>
+
+            <button class="btn btn-dark" style="margin-left: 5px; width: 12%;" (click)="logout()" type="submit"><i
+                class="fa fa-sign-out"></i></button>
         </div>
+    
     </div>
 </div>
 <!--Thanh Navbar-->
@@ -19,8 +23,19 @@
         <li><a routerLink="/about">Giới thiệu</a></li>
         <li><a routerLink="/contact">Liên hệ</a></li>
         <li class="nav-right">
-            <a routerLink="/login"><img src="assets/image/login.png">Đăng nhập</a>
+            <div *ngIf="!checkLogin;else showbtnDN">
+                <a routerLink="/login"><img src="assets/image/login.png">Đăng nhập</a>
+            </div>
+            <ng-template  #showbtnDN><a routerLink="/profile/{{user.id}}"><img src="assets/image/login.png">{{user.name}}</a></ng-template>
+            
         </li>
+        <!-- <div *ngIf="provider=='local';else showImg">
+                        <img src="http://localhost:8080/customerimg/{{customer.imageUrl}}" style="border-radius: 50%;" width="250px" height="250px" />
+                    </div>
+                    
+                    <ng-template let-file pTemplate="file" #showImg><img src="{{customer.imageUrl}}" style="border-radius: 50%;" width="250px" height="250px" /></ng-template> -->
+
+
         <li class="nav-right">
             <a routerLink="/cart"><img src="assets/image/shopping-cart.png"> Giỏ hàng</a>
         </li>

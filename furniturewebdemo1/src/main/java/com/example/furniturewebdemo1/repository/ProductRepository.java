@@ -13,4 +13,11 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
 //    @Query(value = "select *from product_image as pi where pi.product_id=:product_id",nativeQuery = true)
 //    List<ProductImage> listProductImageByProductId(@Param("product_id") long product_id);
+
+    @Query(value = "select p.product_id,p.color, p.description, p.discount_price, p.material, p.name, p.price, p.quantity, p.size, p.category_id, p.supplier_id \n" +
+            "from ((category as c inner join product as p on c.category_id = p.category_id) \n" +
+            "inner join category_categorytype as cc on c.category_id = cc.category_id)\n" +
+            "inner join categorytype as ct on cc.categorytype_id = ct.categorytype_id\n" +
+            "where ct.categorytype_id =:categorytype_id",nativeQuery = true)
+    List<Product> listProductCategoryType(@Param("categorytype_id") long categorytype_id);
 }

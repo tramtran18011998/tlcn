@@ -11,8 +11,10 @@ export class CustomerService {
 
   private baseUrl = 'http://localhost:8080/api/customer';
   private urlUser = 'http://localhost:8080/api/user';
+  private urlUser2 = 'http://localhost:8080/api/users';
   private url = 'http://localhost:8080/api/customeruser';
-  private urlImgae = 'http://localhost:8080/customerimg';
+  private urlImgae = 'http://localhost:8080/api/userimg';
+  private urlU = 'http://localhost:8080/api/employeeuser';
 
   private _refresh = new Subject<void>();
   private headers= new HttpHeaders({
@@ -61,8 +63,24 @@ export class CustomerService {
     );
   }
 
+  updateUser(id: number, value: any): Observable<Object> {
+    return this.http.put(`${this.urlU}/${id}`, value, this.options).pipe(
+      tap(()=> {
+        this._refresh.next();
+      })
+    );
+  }
+
   update(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/${id}`, value, this.options).pipe(
+      tap(()=> {
+        this._refresh.next();
+      })
+    );
+  }
+
+  updateImg(fd: FormData,id: number): Observable<Object> {
+    return this.http.put(`${this.urlImgae}/${id}`, fd, this.optionsImg).pipe(
       tap(()=> {
         this._refresh.next();
       })

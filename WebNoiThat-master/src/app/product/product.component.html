@@ -9,20 +9,17 @@
     <div class="row">
         <div class="col-md-3 col-12">
             <h3>Danh mục</h3>
-            <div class="list-group" >
-                <div *ngFor="let categoryType of categoryTypes" >
+            <div class="list-group">
+                <div *ngFor="let categoryType of categoryTypes">
                     <div class="dropdown-container">
-                            <a href=""  class="list-group-item list-group-item-action" (click)="getById(categoryType.id)">{{categoryType.name}}
-                                    <!-- <div class="dropdown-menu" *ngFor="let category of categories | async">
-                                                
-                                            <a class="dropdown-item" href="">{{category.name}}</a>
-                                        
-                                    </div>  -->
-                                </a>
+                        <a class="list-group-item list-group-item-action"
+                            (click)="loadProductByType(categoryType.id)">{{categoryType.name}}
+
+                        </a>
                     </div>
-                        
+
                 </div>
-                
+
             </div>
             <h3 class="line">Giá</h3>
             <div class="note-price">
@@ -42,10 +39,10 @@
                 <div class="row">
                     <div class="col-6">
                         <select class="form-control">
-                        <option value="volvo">---</option>
-                        <option value="saab">Giá thấp</option>
-                        <option value="opel">Giá cao</option>
-                        <option value="audi">Tên</option>
+                            <option value="volvo">---</option>
+                            <option value="saab">Giá thấp</option>
+                            <option value="opel">Giá cao</option>
+                            <option value="audi">Tên</option>
                         </select>
                     </div>
                     <div class="col-4 seach-product">
@@ -56,7 +53,52 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+
+            <div class="row" >
+                <div class="col-md-4 col-sm-6 col-12" *ngFor="let product of products; let i = index">
+                    <div class="product-img">
+                        <img style="width: 200px;height: 200px; margin: 0;padding: 0; margin-bottom: 10px;width: 100%;"  src="http://localhost:8080/api/productimage/{{imgname[i]}}">
+                    </div>
+                    <div class="product-info">
+                        <div class="row">
+                            <div class="col-6 product-name">
+                                <p>{{product.name}}</p>
+                            </div>
+                            <div class="col-6 product-price">
+                                <strong>{{product.discountPrice}}</strong>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+            <!-- <div class="row">
+                <div *ngFor="let product of products; let i = index">
+                    <div class="col-md-4">
+                        <a routerLink="product-info">
+                            <div class="product-img">
+                                <img src="http://localhost:8080/api/productimage/{{imgname[i]}}">
+                            </div>
+                            <div class="product-info">
+                                <div class="row">
+                                    <div class="col-6 product-name">
+                                        <p>{{product.name}}</p>
+                                    </div>
+                                    <div class="col-6 product-price">
+                                        <strong>{{product.discountPrice}}</strong>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+               
+
+            </div> -->
+            
+            <!-- <div class="row">
                 <div class="col-md-4 col-sm-6 col-12">
                     <a routerLink="product-info">
                         <div class="product-img">
@@ -164,68 +206,11 @@
                                     <strong>150.000đ</strong>
                                 </div>
                             </div>
-
                         </div>
                     </a>
                 </div>
 
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-12">
-                    <a routerLink="product-info">
-                        <div class="product-img">
-                            <img src="assets/image/product.jpg">
-                        </div>
-                        <div class="product-info">
-                            <div class="row">
-                                <div class="col-6 product-name">
-                                    <p>Bàn làm việc</p>
-                                </div>
-                                <div class="col-6 product-price">
-                                    <strong>150.000đ</strong>
-                                </div>
-                            </div>
-
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6 col-12">
-                    <a routerLink="product-info">
-                        <div class="product-img">
-                            <img src="assets/image/product.jpg">
-                        </div>
-                        <div class="product-info">
-                            <div class="row">
-                                <div class="col-6 product-name">
-                                    <p>Bàn làm việc</p>
-                                </div>
-                                <div class="col-6 product-price">
-                                    <strong>150.000đ</strong>
-                                </div>
-                            </div>
-
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6 col-12">
-                    <a routerLink="product-info">
-                        <div class="product-img">
-                            <img src="assets/image/product.jpg">
-                        </div>
-                        <div class="product-info">
-                            <div class="row">
-                                <div class="col-6 product-name">
-                                    <p>Bàn làm việc</p>
-                                </div>
-                                <div class="col-6 product-price">
-                                    <strong>150.000đ</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-            </div>
+            </div> -->
             <nav aria-label="...">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">

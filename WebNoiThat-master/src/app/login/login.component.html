@@ -51,12 +51,12 @@
                                                 </div>
                                             </div>
 
-                                            <div class="custom-control custom-checkbox">
+                                            <!-- <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" id="customCheck1" checked=""
                                                     type="checkbox">
                                                 <label class="custom-control-label" for="customCheck1">Check me
                                                     out</label>
-                                            </div>
+                                            </div> -->
 
                                             <div class="text-center pt-4">
                                                 <button type="submit" class="btn btn-primary">Login</button>
@@ -81,28 +81,90 @@
                                     <!-- register -->
                                     <div class="tab-pane fade" id="pills-register" role="tabpanel"
                                         aria-labelledby="pills-register-tab">
-                                        <form>
+                                        <form [formGroup]="formSignup" (ngSubmit)="onSubmitSignup(formSignup)">
+                                        
+                                            
                                             <div class="form-group">
-                                                <input type="text" name="username" id="name" class="form-control"
-                                                    placeholder="Username" required autofocus>
+                                                <input type="text" class="form-control" name="name"
+                                                     placeholder="Họ tên" id="name"
+                                                    [ngClass]="{'is-invalid':formSignup.get('name').touched && formSignup.get('name').invalid}" formControlName="name" autofocus>
+                                                <div *ngIf="formSignup.get('name').touched && formSignup.get('name').invalid" class="invalid-feedback">
+                                                    <div *ngIf="formSignup.controls.name.errors.required">Tên không được để trống</div>
+                                                </div>
+                                            </div>
+                                   
+                                            
+
+                                            
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="email" id="email"
+                                                    placeholder="Email"
+                                                    [ngClass]="{'is-invalid':formSignup.get('email').touched && formSignup.get('email').invalid}" formControlName="email" required >
+                                                <div *ngIf="formSignup.get('email').touched && formSignup.get('email').invalid" class="invalid-feedback">
+                                                    <div *ngIf="formSignup.controls.email.errors.required">Email không được để trống</div>
+                                                    <div *ngIf="formSignup.controls.email.errors.email">Email không hợp lệ</div>
+                                                </div>
                                             </div>
 
+                                            <!-- <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="Mật khẩu" id="password"
+                                                    name="password" [ngClass]="{'is-invalid':formSignup.get('password').touched && formSignup.get('password').invalid}" formControlName="password" required 
+                                                    />
+                                                <div *ngIf="formSignup.get('password').touched && formSignup.get('password').invalid" class="invalid-feedback">
+                                                    <div *ngIf="formSignup.controls.password.errors.required">Mật khẩu không được để trống</div>
+                                                    <div *ngIf="formSignup.controls.password.errors.minlength">Mật khẩu tối thiếu 6 kí
+                                                        tự</div>
+                                                    <div *ngIf="formSignup.controls.password.errors.pattern">Các kí tự: [a-z], [A-Z],
+                                                            [0-9], - . _ được cho phép</div>
+                                                </div>
+                                            </div> -->
                                             <div class="form-group">
-                                                <input type="email" name="email" id="email" class="form-control"
-                                                    placeholder="Email" required>
+                                                <input type="password" class="form-control" name="password"
+                                                    id="password" formControlName="password"  placeholder="Mật khẩu"
+                                                    [ngClass]="{'is-invalid':formSignup.get('password').touched && formSignup.get('password').invalid }"
+                                                    required />
+                                                <div *ngIf="formSignup.get('password').touched && formSignup.get('password').invalid"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="formSignup.controls.password.errors.required">Mật khẩu không được để
+                                                        trống</div>
+                                                    <div *ngIf="formSignup.controls.password.errors.minlength">Mật khẩu tối thiếu 6 kí
+                                                        tự
+                                                    </div>
+                                                    <div *ngIf="formSignup.controls.password.errors.pattern">Các kí tự: [a-z], [A-Z],
+                                                        [0-9], - . _ được cho phép</div>
+                                                </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <input type="password" name="password" id="password"
-                                                    class="form-control" placeholder="Set a password" required>
-                                            </div>
+                                            <!-- <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" id="password2"
+                                                    name="password2" [ngClass]="{'is-invalid':formSignup.get('password2').touched && formSignup.get('password2').invalid}" formControlName="password2" required  />
+                                                <div *ngIf="formSignup.get('password2').touched && formSignup.get('password2').invalid" class="invalid-feedback">
+                                                    <div *ngIf="formSignup.controls.password2.errors.required">Password is required</div>
+                                                    <div *ngIf="formSignup.controls.password2.errors.NoPassswordMatch">Mật khẩu không
+                                                        chính
+                                                        xác</div>
+                                                </div>
+                                            </div> -->
 
                                             <div class="form-group">
-                                                <input type="password" name="password_confirmation"
-                                                    id="password-confirm" class="form-control"
-                                                    placeholder="Confirm password" required>
+                
+                                                <input type="password" id="password2" name="password2" class="form-control"
+                                                    formControlName="password2" placeholder="Nhập lại Mật khẩu"
+                                                    [ngClass]="{'is-invalid':formSignup.get('password2').touched && formSignup.get('password2').invalid}"
+                                                    required>
+                                
+                                                <div *ngIf="formSignup.get('password2').touched && formSignup.get('password2').invalid"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="formSignup.controls.password2.errors.required">Cần nhập lại mật
+                                                        khẩu
+                                                    </div>
+                                                    <div *ngIf="formSignup.controls.password2.errors.NoPassswordMatch">Mật khẩu không
+                                                        chính
+                                                        xác</div>
+                                
+                                                </div>
+                                
                                             </div>
-
                                             <div class="text-center pt-2 pb-1">
                                                 <button type="submit" class="btn btn-primary">Register</button>
                                             </div>

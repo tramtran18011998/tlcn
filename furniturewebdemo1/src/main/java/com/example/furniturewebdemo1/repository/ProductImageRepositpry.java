@@ -12,4 +12,7 @@ import java.util.List;
 public interface ProductImageRepositpry extends JpaRepository<ProductImage,Long> {
     @Query(value = "select *from product_image as pi where pi.product_id=:product_id",nativeQuery = true)
     List<ProductImage> listProductImageByProductId(@Param("product_id") long product_id);
+
+    @Query(value = "select *from product_image as pi where pi.product_id=:product_id limit 1",nativeQuery = true)
+    ProductImage getProductImageByProductIdLimit(@Param("product_id") long product_id);
 }
