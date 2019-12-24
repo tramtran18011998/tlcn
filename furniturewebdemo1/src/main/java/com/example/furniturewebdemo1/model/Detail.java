@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
@@ -66,4 +65,8 @@ public class Detail implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
+
+    @OneToMany(mappedBy = "detail", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("detail")
+    private Collection<CartDetail> cartDetails;
 }

@@ -43,4 +43,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     @JsonIgnoreProperties("customer")
     private Set<Cart> carts;
+
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("customer")
+    private Set<CartDetail> cartDetails;
 }

@@ -73,9 +73,13 @@ public class Product {
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
-    @ManyToMany(mappedBy = "products",fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("categoryTypes")
-    private Set<Cart> carts;
+//    @ManyToMany(mappedBy = "products",fetch = FetchType.EAGER)
+//    @JsonIgnoreProperties("categoryTypes")
+//    private Set<Cart> carts;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("product")
+    private Collection<Cart> carts;
 
 
 }

@@ -11,26 +11,20 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "cart")
+@Table(name = "cartdetail")
 @JsonIgnoreProperties({"products"})
-public class Cart {
-
+public class CartDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_id")
+    @Column(name = "cartdetail_id")
     private long id;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name = "cart_product", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-//    @JsonIgnoreProperties("carts")
-//    private Set<Product> products;
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties("carts")
-    private Product product;
+    @JoinColumn(name = "detail_id")
+    @JsonIgnoreProperties("cartDetails")
+    private Detail detail;
 
-    private String productname;
+    private String detailname;
 
     private long quantity;
 
@@ -42,6 +36,6 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    @JsonIgnoreProperties("carts")
+    @JsonIgnoreProperties("cartDetails")
     private Customer customer;
 }
