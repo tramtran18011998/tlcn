@@ -67,6 +67,6 @@ public class Detail implements Serializable {
     private Supplier supplier;
 
     @OneToMany(mappedBy = "detail", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("detail")
+    @JsonIgnoreProperties(value = "detail", allowSetters = true)
     private Collection<CartDetail> cartDetails;
 }

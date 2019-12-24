@@ -21,7 +21,7 @@ public class CartDetail {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "detail_id")
-    @JsonIgnoreProperties("cartDetails")
+    @JsonIgnoreProperties(value = "cartDetails", allowSetters = true)
     private Detail detail;
 
     private String detailname;
@@ -36,6 +36,6 @@ public class CartDetail {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    @JsonIgnoreProperties("cartDetails")
+    @JsonIgnoreProperties(value = "cartDetails", allowSetters = true)
     private Customer customer;
 }

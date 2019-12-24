@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "cart")
 @JsonIgnoreProperties({"products"})
-public class Cart {
+public class Cart implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +28,7 @@ public class Cart {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties("carts")
+    @JsonIgnoreProperties(value = "carts", allowSetters = true)
     private Product product;
 
     private String productname;
@@ -42,6 +43,6 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    @JsonIgnoreProperties("carts")
+    @JsonIgnoreProperties(value = "carts", allowSetters = true)
     private Customer customer;
 }

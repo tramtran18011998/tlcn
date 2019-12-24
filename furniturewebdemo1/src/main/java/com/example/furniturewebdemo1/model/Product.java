@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ import java.util.Set;
 @Entity
 @Table(name = "product")
 @JsonIgnoreProperties({"invoiceproduct_products","products"})
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,7 +79,7 @@ public class Product {
 //    private Set<Cart> carts;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("product")
+    @JsonIgnoreProperties(value = "product" , allowSetters = true)
     private Collection<Cart> carts;
 
 

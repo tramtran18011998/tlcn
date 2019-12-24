@@ -44,8 +44,15 @@ export class CartService {
   }
 
   
-  createNew(ob: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, ob, this.options).pipe(
+  // createNew(ob: Object): Observable<Object> {
+  //   return this.http.post(`${this.baseUrl}`, ob, this.options).pipe(
+  //     tap(()=> {
+  //       this._refresh.next();
+  //     })
+  //   );
+  // }
+  createNew(idpro: number, idcus: number, ob: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/${idpro}/${idcus}`, ob, this.options).pipe(
       tap(()=> {
         this._refresh.next();
       })

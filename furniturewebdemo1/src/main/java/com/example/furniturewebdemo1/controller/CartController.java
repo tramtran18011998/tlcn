@@ -6,6 +6,8 @@ import com.example.furniturewebdemo1.model.Customer;
 import com.example.furniturewebdemo1.model.Product;
 import com.example.furniturewebdemo1.repository.CartRepository;
 import com.example.furniturewebdemo1.service.CartService;
+import com.example.furniturewebdemo1.service.CustomerService;
+import com.example.furniturewebdemo1.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,12 @@ import java.util.List;
 public class CartController {
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private CustomerService customerService;
 
     @Autowired
     private CartRepository cartRepository;
@@ -63,20 +71,54 @@ public class CartController {
         return cartRepository.getListCartByCustomer(id);
     }
 
-    @PostMapping("/cart")
-    public  Cart createCartCheck(@Valid @RequestBody Cart cart) throws ResourceNotFoundException {
+//    @PostMapping("/cart")
+//    public  Cart createCartCheck(@Valid @RequestBody Cart cart) throws ResourceNotFoundException {
+//        //Product product = cart.getProduct();
+//        Product product = cart.getProduct();
+//        logger.info(String.valueOf(product.getId()));
+//        Customer customer = cart.getCustomer();
+//        logger.info(String.valueOf(customer.getId()));
+//
+//        Cart cart1 = checkCartExistProCus(product.getId(), customer.getId());
+//        logger.info(String.valueOf(cart1));
+//
+//        //exist
+//        if(cart1 != null){
+//            cart1.setQuantity(cart1.getQuantity()+1);
+//            logger.info(String.valueOf(cart1.getQuantity()));
+//            cart1.setTotalprice(cart1.getPrice()*cart1.getQuantity());
+//            logger.info(String.valueOf(cart1.getTotalprice()));
+//            updateCart(cart1.getId(), cart1);
+//            logger.info("null");
+//            long count =cartRepository.countQuantity(customer.getId());
+//            logger.info(String.valueOf(count));
+//            return cart1;
+//        }
+//        else {
+//            //create new cart
+//            logger.info("save");
+//            cartService.save(cart);
+//            return cart;
+//        }
+//
+//    }
+
+    @PostMapping("/cart/{idpro}/{idcus}")
+    public  Cart createCartCheck(@PathVariable(value = "idpro") long idpro,@PathVariable(value = "idcus") long idcus,@Valid @RequestBody Cart cart) throws ResourceNotFoundException {
         //Product product = cart.getProduct();
-        Product product = cart.getProduct();
+        Product product = productService.findProductById(idpro).orElseThrow(()-> new ResourceNotFoundException("Product not found"));
         logger.info(String.valueOf(product.getId()));
-        Customer customer = cart.getCustomer();
+        Customer customer = customerService.findCustomerId(idcus).orElseThrow(()-> new ResourceNotFoundException("Product not found"));
         logger.info(String.valueOf(customer.getId()));
 
         Cart cart1 = checkCartExistProCus(product.getId(), customer.getId());
         logger.info(String.valueOf(cart1));
 
+        cart.setCustomer(customer);
+        cart.setProduct(product);
         //exist
         if(cart1 != null){
-            cart1.setQuantity(cart1.getQuantity()+1);
+            cart1.setQuantity(cart1.getQuantity()+cart.getQuantity());
             logger.info(String.valueOf(cart1.getQuantity()));
             cart1.setTotalprice(cart1.getPrice()*cart1.getQuantity());
             logger.info(String.valueOf(cart1.getTotalprice()));

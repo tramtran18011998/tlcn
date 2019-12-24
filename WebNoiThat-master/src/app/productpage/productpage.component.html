@@ -1,8 +1,8 @@
 <app-header></app-header>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-        <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+        <li class="breadcrumb-item"><a routerLink="">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a routerLink="/product">Sản phẩm</a></li>
         <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
     </ol>
 </nav>
@@ -40,63 +40,18 @@
             <h6 style="font-weight: bold;margin-bottom: 10px;">Mô tả  :</h6>
             <p>{{product.description}}</p>
             <div class="input-group mb-3" style="width:120px">
-                <div class="input-group-prepend">
-                    <button class="btn btn-outline-primary" type="button" id="button-subtract">-</button>
-                </div>
-                <input type="text" class="form-control number-product" placeholder="" aria-describedby="button-addon1" value="1">
-                <div class="input-group-prepend">
-                    <button class="btn btn-outline-primary" type="button" id="button-add" style="border-radius:0px 4px 4px 0px;">+</button>
-                </div>
+                
+                <input style="margin: auto;width: 30%;" type="number" min="1" placeholder="1" [(ngModel)]="quantity" 
+                    class="form-control" (input)="onSearchChange($event.target.value)" >
+                
             </div>
-            <button class="btn btn-success" id="them-vao-gio-hang">Thêm vào giỏ</button>
+            <button (click)="addCart()" class="btn btn-success" id="them-vao-gio-hang">Thêm vào giỏ</button>
 
         </div>
 
 
     </div>
-    <!-- <h2 style="color: red; text-align: center; margin: 50px;">Sản phẩm khác</h2>
-    <div class="row">
-        <div class="col-md-3 col-sm-6 col-12">
-            <a href="#">
-                <div class="product-img">
-                    <img src="assets/image/product.jpg">
-                </div>
-                <div class="product-info">
-                    <p>Bàn làm việc</p>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-6 col-12">
-            <a href="#">
-                <div class="product-img">
-                    <img src="assets/image/product.jpg">
-                </div>
-                <div class="product-info">
-                    <p>Bàn làm việc</p>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-6 col-12">
-            <a href="#">
-                <div class="product-img">
-                    <img src="assets/image/product.jpg">
-                </div>
-                <div class="product-info">
-                    <p>Bàn làm việc</p>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-6 col-12">
-            <a href="#">
-                <div class="product-img">
-                    <img src="assets/image/product.jpg">
-                </div>
-                <div class="product-info">
-                    <p>Bàn làm việc</p>
-                </div>
-            </a>
-        </div>
-    </div> -->
+    
 </div>
 
 <app-footer></app-footer>

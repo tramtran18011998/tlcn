@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ import java.util.Set;
 @Setter
 @Table(name = "customer")
 @JsonIgnoreProperties({"customer","invoiceDetails","invoiceProducts","carts","cartDetails"})
-public class Customer {
+public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
@@ -41,10 +42,10 @@ public class Customer {
     private Set<InvoiceDetail> invoiceDetails;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("customer")
+    @JsonIgnoreProperties(value = "customer" , allowSetters = true)
     private Set<Cart> carts;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("customer")
+    @JsonIgnoreProperties(value = "customer" , allowSetters = true)
     private Set<CartDetail> cartDetails;
 }
