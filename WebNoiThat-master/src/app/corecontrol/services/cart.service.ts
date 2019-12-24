@@ -9,7 +9,8 @@ import {tap} from 'rxjs/operators'
 export class CartService {
 
   private baseUrl = 'http://localhost:8080/api/cart';
-  private urlcount = 'http://localhost:8080/api/cart';
+  private urlcount = 'http://localhost:8080/api/cartcount';
+  private urllist = 'http://localhost:8080/api/cartlist';
 
   private _refresh = new Subject<void>();
   private headers= new HttpHeaders({
@@ -25,8 +26,12 @@ export class CartService {
     return this._refresh;
   }
 
-  total(): Observable<any>{
-    return this.http.get(`${this.urlcount}`, this.options);
+  countQuantity(id: number): Observable<any>{
+    return this.http.get(`${this.urlcount}/${id}`, this.options);
+  }
+
+  getListCartByCustomer(id: number): Observable<any>{
+    return this.http.get(`${this.urllist}/${id}`, this.options);
   }
 
 

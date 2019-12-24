@@ -105,13 +105,27 @@ public class CartController {
     public ResponseEntity<Cart> updateCart(@PathVariable(value = "id") long id, @Valid @RequestBody Cart cart) throws ResourceNotFoundException {
         Cart currentCart= cartService.findCartById(id).orElseThrow(()-> new ResourceNotFoundException("Category not found"));
 
-        currentCart.setProduct(cart.getProduct());
-        currentCart.setCustomer(cart.getCustomer());
-        currentCart.setPrice(cart.getPrice());
-        currentCart.setProductname(cart.getProductname());
-        currentCart.setQuantity(cart.getQuantity());
-        currentCart.setTotalprice(cart.getTotalprice());
-        currentCart.setStatus(cart.getStatus());
+        if(cart.getProduct()!= null){
+            currentCart.setProduct(cart.getProduct());
+        }
+        if(cart.getCustomer()!= null){
+            currentCart.setCustomer(cart.getCustomer());
+        }
+        if (cart.getPrice()!=0){
+            currentCart.setPrice(cart.getPrice());
+        }
+        if(cart.getProductname()!=null){
+            currentCart.setProductname(cart.getProductname());
+        }
+        if(cart.getQuantity()!=0){
+            currentCart.setQuantity(cart.getQuantity());
+        }
+        if(cart.getTotalprice()!=0){
+            currentCart.setTotalprice(cart.getTotalprice());
+        }
+        if(cart.getStatus()!=0){
+            currentCart.setStatus(cart.getStatus());
+        }
 
         cartService.save(currentCart);
         return ResponseEntity.ok(currentCart);

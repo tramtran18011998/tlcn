@@ -68,6 +68,7 @@ export class ProfileComponent implements OnInit {
   onSubmit(){
     this.onSubmitUpload();
     
+    localStorage.setItem('currentuser', JSON.stringify(this.customerUser));
     this.customerService.updateUser(this.id,this.customerUser).subscribe(data=>{
       console.log(data);    
       Swal.fire(
@@ -75,6 +76,7 @@ export class ProfileComponent implements OnInit {
         'Dữ liệu đã được cập nhật.',
         'success'
       ); 
+      
       location.reload();
     },error=>console.log(error));
   
